@@ -1,0 +1,62 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "sleet-hello",
+  "title": "Sleet Hello",
+  "description": "A hello extention by Sleet for interacting with the near blockchain.",
+  "icon": "extension-icon.png",
+  "author": "nonresistant",
+  "owner": "sleet",
+  "categories": [
+    "Finance",
+    "Security",
+    "Communication",
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "get-greeting",
+      "title": "get greeting",
+      "description": "get the greeting from hello.sleet.near",
+      "mode": "no-view"
+    },
+    {
+      "name": "update-greeting",
+      "title": "update greeting",
+      "description": "update the greeting at hello.sleet.near",
+      "mode": "no-view"
+    },
+    {
+      "name": "login",
+      "title": "login",
+      "description": "login with your near account so that you can interact with the near bockchain",
+      "mode": "no-view"
+    },
+    {
+      "name": "create-a-new-near-account",
+      "title": "create a new near account",
+      "description": "create a new near account",
+      "mode": "no-view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.94.3",
+    "@raycast/utils": "^1.17.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
