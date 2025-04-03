@@ -2,6 +2,8 @@
 
 A hello extension by Sleet for interacting with the near blockchain.
 
+> this app uses near api js, but makes use of near cli credidentials for signing trasactions
+
 ---
 
 ### dev
