@@ -18,7 +18,15 @@
       "name": "get-greeting",
       "title": "Get Greeting",
       "description": "Fetch and display the greeting from the NEAR blockchain",
-      "mode": "view"
+      "mode": "view",
+      "view": "GetGreeting"
+    },
+    {
+      "name": "update-greeting",
+      "title": "Update Greeting",
+      "description": "Update the greeting on the NEAR blockchain using your credentials",
+      "mode": "view",
+      "view": "UpdateGreeting"
     }
   ],
   "preferences": [
