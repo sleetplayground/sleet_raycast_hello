@@ -14,36 +14,7 @@
   ],
   "license": "MIT",
   "commands": [
-    {
-      "name": "get-greeting",
-      "title": "get greeting",
-      "description": "get the greeting from hello.sleet.near",
-      "mode": "view"
-    },
-    {
-      "name": "update-greeting",
-      "title": "update greeting",
-      "description": "update the greeting at hello.sleet.near",
-      "mode": "no-view"
-    },
-    {
-      "name": "login",
-      "title": "login",
-      "description": "login with your near account so that you can interact with the near bockchain",
-      "mode": "no-view"
-    },
-    {
-      "name": "create-a-new-near-account",
-      "title": "create a new near account",
-      "description": "create a new near account",
-      "mode": "no-view"
-    },
-    {
-      "name": "export-credentials",
-      "title": "export near credentials",
-      "description": "export your near credentials to a markdown file",
-      "mode": "no-view"
-    }
+
   ],
 
 
