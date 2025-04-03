@@ -49,28 +49,7 @@
 
 
   "preferences": [
-    {
-      "name": "credentialsPath",
-      "title": "NEAR Credentials Path",
-      "description": "Select your NEAR credentials directory (defaults to ~/.near-credentials)",
-      "type": "directory",
-      "required": false,
-      "default": "~/.near-credentials"
-    },
-    {
-      "name": "selectedAccount",
-      "title": "NEAR Account",
-      "description": "Select which NEAR account to use for transactions (optional)",
-      "type": "dropdown",
-      "required": false,
-      "default": "none",
-      "data": [
-        {
-          "title": "No Account",
-          "value": "none"
-        }
-      ]
-    },
+
     {
       "name": "networkId",
       "title": "NEAR Network",
