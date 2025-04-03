@@ -39,12 +39,6 @@
       "mode": "no-view"
     },
     {
-      "name": "list-accounts",
-      "title": "list near accounts",
-      "description": "list all available near accounts in your credentials",
-      "mode": "no-view"
-    },
-    {
       "name": "export-credentials",
       "title": "export near credentials",
       "description": "export your near credentials to a markdown file",
