@@ -30,6 +30,7 @@ check mark for if they are implemented!
 - [ ] backup/save your near account info to a markdown file
 - [ ] lable your public keys and save to a markdown file
 - [ ] open web4 sites in browser
+- [ ] create a meme token on meme cooking
 
 ### commands
 
