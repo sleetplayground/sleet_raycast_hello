@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Form, ActionPanel, Action, showToast, Toast } from "@raycast/api";
+import { Form, ActionPanel, Action, showToast, Toast, Clipboard } from "@raycast/api";
 import { connect, keyStores, KeyPair, Contract } from "near-api-js";
 import { getNetworkConfig } from "./utils/config";
 import { getAvailableAccounts } from "./utils/credentials";
@@ -13,13 +13,16 @@ interface FormValues {
 export default function UpdateGreeting() {
   const [accounts, setAccounts] = useState<{ value: string; title: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [contractName, setContractName] = useState("");
+  const [formValues, setFormValues] = useState<FormValues>({ network: "", account: "", greeting: "" });
 
   useEffect(() => {
     loadAccounts();
   }, []);
 
   const loadAccounts = async () => {
-    const { networkId } = await getNetworkConfig();
+    const { networkId, contractName } = await getNetworkConfig();
+    setContractName(contractName);
     const availableAccounts = getAvailableAccounts(networkId);
     
     setAccounts(
@@ -29,6 +32,10 @@ export default function UpdateGreeting() {
       }))
     );
     setIsLoading(false);
+  };
+
+  const handleFormChange = (field: keyof FormValues, value: string) => {
+    setFormValues(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (values: FormValues) => {
@@ -92,6 +99,19 @@ export default function UpdateGreeting() {
       actions={
         <ActionPanel>
           <Action.SubmitForm title="Update Greeting" onSubmit={handleSubmit} />
+          <Action
+            title="Copy NEAR CLI Command"
+            shortcut={{ modifiers: ["cmd"], key: "c" }}
+            onAction={() => {
+              const cliCommand = `near call ${contractName} set_greeting '{"greeting":"${formValues.greeting}"}' --accountId ${formValues.account || accounts[0]?.value}`;
+              Clipboard.copy(cliCommand);
+              showToast({
+                style: Toast.Style.Success,
+                title: "CLI Command Copied",
+                message: "Paste it in your terminal to execute"
+              });
+            }}
+          />
         </ActionPanel>
       }
     >
@@ -99,6 +119,7 @@ export default function UpdateGreeting() {
         id="account" 
         title="Account"
         info="Select the NEAR account that will be used to update the greeting"
+        onChange={(value) => handleFormChange("account", value)}
       >
         {accounts.map((account) => (
           <Form.Dropdown.Item
@@ -113,6 +134,7 @@ export default function UpdateGreeting() {
         title="New Greeting"
         placeholder="Enter your new greeting"
         info="The new greeting message that will be stored on the NEAR blockchain"
+        onChange={(value) => handleFormChange("greeting", value)}
       />
     </Form>
   );
