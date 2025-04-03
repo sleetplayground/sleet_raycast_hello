@@ -56,6 +56,20 @@
 
   "preferences": [
     {
+      "name": "selectedAccount",
+      "title": "NEAR Account",
+      "description": "Select which NEAR account to use for transactions",
+      "type": "dropdown",
+      "required": false,
+      "data": [
+        {
+          "title": "Default Account",
+          "value": "default",
+          "label": "Use the first available account"
+        }
+      ]
+    },
+    {
       "name": "networkId",
       "title": "NEAR Network",
       "description": "Select which NEAR network to connect to",
@@ -110,14 +124,6 @@
       "type": "textfield",
       "required": false,
       "placeholder": "hello.sleet.testnet"
-    },
-    {
-      "name": "useExistingCredentials",
-      "title": "Use Existing Credentials",
-      "description": "Use credentials from .near-credentials folder",
-      "type": "checkbox",
-      "required": false,
-      "default": true
     }
   ],
 
