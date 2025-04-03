@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ActionPanel, Detail, Action } from "@raycast/api";
+import { ActionPanel, Detail, Action, Clipboard } from "@raycast/api";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
 
@@ -52,8 +52,11 @@ ${greeting}
 - **Network:** ${networkId}
 - **RPC Endpoint:** ${nodeUrl}
 
+## NEAR CLI Command
+\`near view ${contractName} get_greeting --networkId ${networkId} --nodeUrl ${nodeUrl}\`
+
 ---
-*Click the refresh button to update the greeting*
+*Click the refresh button to update the greeting or copy the CLI command to interact via terminal*
   `;
 
   return (
@@ -62,6 +65,7 @@ ${greeting}
       actions={
         <ActionPanel>
           <Action title="Refresh Greeting" onAction={refreshGreeting} />
+          <Action title="Copy NEAR CLI Command" onAction={() => Clipboard.copy(`near view ${contractName} get_greeting --networkId ${networkId} --nodeUrl ${nodeUrl}`)} />
         </ActionPanel>
       }
     />
