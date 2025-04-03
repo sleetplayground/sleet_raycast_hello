@@ -3,7 +3,7 @@
   "name": "sleet-hello",
   "title": "Sleet Hello",
   "description": "A hello extention by Sleet for interacting with the near blockchain.",
-  "icon": "extension-icon.png",
+  "icon": "sleet_icon.svg",
   "author": "nonresistant",
   "owner": "sleet",
   "categories": [
