@@ -65,9 +65,7 @@ export default function UpdateGreeting() {
         }
       ) as GreetingContract;
 
-      await contract.set_greeting({
-        args: { greeting: values.greeting },
-      });
+      await contract.set_greeting({ greeting: values.greeting });
 
       await showToast({
         style: Toast.Style.Success,
@@ -80,6 +78,10 @@ export default function UpdateGreeting() {
         style: Toast.Style.Failure,
         title: "Error",
         message: error instanceof Error ? error.message : "Failed to update greeting",
+        primaryAction: {
+          title: "Retry",
+          onAction: () => handleSubmit(values)
+        }
       });
     }
   };
