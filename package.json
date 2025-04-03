@@ -58,14 +58,14 @@
     {
       "name": "selectedAccount",
       "title": "NEAR Account",
-      "description": "Select which NEAR account to use for transactions",
+      "description": "Select which NEAR account to use for transactions (optional)",
       "type": "dropdown",
       "required": false,
+      "default": "none",
       "data": [
         {
-          "title": "Default Account",
-          "value": "default",
-          "label": "Use the first available account"
+          "title": "No Account",
+          "value": "none"
         }
       ]
     },
