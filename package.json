@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "sleet-hello",
   "title": "Sleet Hello",
-  "description": "A hello extention by Sleet for interacting with the near blockchain.",
+  "description": "A hello extension by Sleet for interacting with the near blockchain.",
   "icon": "sleet_icon.svg",
   "author": "nonresistant",
   "owner": "sleet",
@@ -52,10 +52,10 @@
     {
       "name": "credentialsPath",
       "title": "NEAR Credentials Path",
-      "description": "Path to your NEAR credentials directory (defaults to ~/.near-credentials)",
-      "type": "textfield",
+      "description": "Select your NEAR credentials directory (defaults to ~/.near-credentials)",
+      "type": "directory",
       "required": false,
-      "placeholder": "~/.near-credentials"
+      "default": "~/.near-credentials"
     },
     {
       "name": "selectedAccount",
