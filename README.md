@@ -26,22 +26,20 @@ pnpm publish
 check mark for if they are implemented!
 - [x] get the greeting from hello.sleet.near/.testnet on mainnet and testnet
 - [X] update the greeting
-- [ ] login with near private key
 - [ ] create new near account, a *.user.raycast.near
 - [ ] backup/save your near account info to a markdown file
 - [ ] lable your public keys and save to a markdown file
 - [ ] open web4 sites in browser
 - [ ] create a meme token on meme cooking
-- [ ] install near cli
 - [ ] linktree
 - [ ] colorsnake
 
-### commands
 
-get greeting
-
-update greeting
-
+near cli commands
+- [ ] install near cli "curl --proto '=https' --tlsv1.2 -LsSf https://github.com/near/near-cli-rs/releases/latest/download/near-cli-rs-installer.sh | sh"
+- [ ] near -V
+- [ ] near - brings up interactive menu in cli
+- [ ] login, make sure to save account credidentals to legacy
 
 
 
