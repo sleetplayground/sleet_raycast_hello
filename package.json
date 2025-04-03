@@ -37,16 +37,75 @@
       "title": "create a new near account",
       "description": "create a new near account",
       "mode": "no-view"
+    },
+    {
+      "name": "list-accounts",
+      "title": "list near accounts",
+      "description": "list all available near accounts in your credentials",
+      "mode": "no-view"
+    },
+    {
+      "name": "export-credentials",
+      "title": "export near credentials",
+      "description": "export your near credentials to a markdown file",
+      "mode": "no-view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "networkId",
+      "title": "NEAR Network",
+      "description": "Select which NEAR network to connect to",
+      "type": "dropdown",
+      "required": true,
+      "default": "testnet",
+      "data": [
+        {
+          "title": "Testnet",
+          "value": "testnet"
+        },
+        {
+          "title": "Mainnet",
+          "value": "mainnet"
+        }
+      ]
+    },
+    {
+      "name": "nodeUrl",
+      "title": "RPC Node URL",
+      "description": "Custom RPC node URL (optional)",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "https://rpc.testnet.near.org"
+    },
+    {
+      "name": "contractName",
+      "title": "Contract Name",
+      "description": "The contract to interact with",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "hello.sleet.testnet"
+    },
+    {
+      "name": "useExistingCredentials",
+      "title": "Use Existing Credentials",
+      "description": "Use credentials from .near-credentials folder",
+      "type": "checkbox",
+      "required": false,
+      "default": true
     }
   ],
   "dependencies": {
     "@raycast/api": "^1.94.3",
-    "@raycast/utils": "^1.17.0"
+    "@raycast/utils": "^1.17.0",
+    "near-api-js": "^5.1.1",
+    "fs-extra": "^11.3.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
     "@types/node": "22.13.10",
     "@types/react": "19.0.10",
+    "@types/fs-extra": "^11.0.4",
     "eslint": "^9.22.0",
     "prettier": "^3.5.3",
     "typescript": "^5.8.2"
