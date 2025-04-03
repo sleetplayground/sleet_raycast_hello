@@ -40,9 +40,10 @@ near cli commands
 - [x] near -V
 - [x] near - brings up interactive menu in cli
 - [x] login, make sure to save account credidentals to legacy so you can use them in this app
-- [ ] near account import-account using-private-key
-- [ ] near account export-account $ACCOUNT_ID
-
+- [x] near account import-account using-private-key
+- [x] near account export-account $ACCOUNT_ID
+- [x] near list-keys $ACCOUNT_ID
+- [x] near config show-connections
 
 
 

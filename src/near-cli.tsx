@@ -46,6 +46,18 @@ export default function Command() {
       description: "Export a NEAR account's credentials",
       icon: Icon.Download,
     },
+    {
+      title: "List Account Keys",
+      command: "near list-keys $ACCOUNT_ID",
+      description: "List all access keys for a NEAR account",
+      icon: Icon.List,
+    },
+    {
+      title: "Show Network Connections",
+      command: "near config show-connections",
+      description: "Display current NEAR network configuration",
+      icon: Icon.Network,
+    },
   ];
 
   return (
