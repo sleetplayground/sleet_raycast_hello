@@ -36,11 +36,12 @@ check mark for if they are implemented!
 
 
 near cli commands
-- [ ] install near cli "curl --proto '=https' --tlsv1.2 -LsSf https://github.com/near/near-cli-rs/releases/latest/download/near-cli-rs-installer.sh | sh"
-- [ ] near -V
-- [ ] near - brings up interactive menu in cli
-- [ ] login, make sure to save account credidentals to legacy
-
+- [x] install near cli "curl --proto '=https' --tlsv1.2 -LsSf https://github.com/near/near-cli-rs/releases/latest/download/near-cli-rs-installer.sh | sh"
+- [x] near -V
+- [x] near - brings up interactive menu in cli
+- [x] login, make sure to save account credidentals to legacy so you can use them in this app
+- [ ] near account import-account using-private-key
+- [ ] near account export-account $ACCOUNT_ID
 
 
 

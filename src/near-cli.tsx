@@ -47,7 +47,7 @@ export default function Command() {
           actions={
             <ActionPanel>
               <Action.CopyToClipboard
-                title="Copy NEAR CLI Command"
+                title="Copy CLI Command"
                 content={item.command}
               />
             </ActionPanel>
