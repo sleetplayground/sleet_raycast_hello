@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ActionPanel, List, Action } from "@raycast/api";
 import { getNetworkConfig } from "../utils/config";
 import { connect, Contract } from "near-api-js";
