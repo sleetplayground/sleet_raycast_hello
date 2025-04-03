@@ -33,7 +33,7 @@ export default function UpdateGreeting() {
 
   const handleSubmit = async (values: FormValues) => {
     try {
-      const { nodeUrl, networkId } = await getNetworkConfig();
+      const { nodeUrl, networkId, contractName } = await getNetworkConfig();
       const availableAccounts = getAvailableAccounts(networkId);
       const accountCredentials = availableAccounts.find(
         (acc) => acc.account_id === values.account
@@ -57,7 +57,7 @@ export default function UpdateGreeting() {
 
       const contract = new Contract(
         account,
-        "hello.sleet.near",
+        contractName,
         {
           viewMethods: ["get_greeting"],
           changeMethods: ["set_greeting"],
