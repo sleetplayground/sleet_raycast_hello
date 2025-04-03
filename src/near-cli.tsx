@@ -34,6 +34,18 @@ export default function Command() {
       description: "Login to your NEAR account",
       icon: Icon.Person,
     },
+    {
+      title: "Import NEAR Account",
+      command: "near account import-account using-private-key",
+      description: "Import a NEAR account using a private key",
+      icon: Icon.Key,
+    },
+    {
+      title: "Export NEAR Account",
+      command: "near account export-account $ACCOUNT_ID",
+      description: "Export a NEAR account's credentials",
+      icon: Icon.Download,
+    },
   ];
 
   return (
