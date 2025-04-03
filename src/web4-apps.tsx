@@ -1,7 +1,7 @@
 import { Action, ActionPanel, List, Icon, showToast, Toast, Form, useNavigation } from "@raycast/api";
-import { useState } from "react";
-import { getConfig } from "./utils/config";
-import { connect } from "near-api-js";
+import { useState, useEffect } from "react";
+import { getNetworkConfig } from "./utils/config";
+import { connect, Contract } from "near-api-js";
 
 interface Web4App {
   active: boolean;
@@ -54,11 +54,12 @@ export default function Command() {
   useEffect(() => {
     async function fetchApps() {
       try {
-        const config = await getConfig();
-        const near = await connect(config);
+        const { nodeUrl, networkId } = await getNetworkConfig();
+        const near = await connect({ nodeUrl, networkId });
+        const contractAddress = networkId === "mainnet" ? "awesomeweb4.near" : "awesomeweb4.testnet";
         const contract = new Contract(
-          near.connection.account(),
-          "awesomeweb4.testnet",
+          near.account(),
+          contractAddress,
           {
             viewMethods: ["get_apps"],
             changeMethods: [],
