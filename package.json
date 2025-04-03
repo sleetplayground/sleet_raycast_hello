@@ -83,20 +83,8 @@
         {
           "title": "FastNEAR",
           "value": "fastnear"
-        },
-        {
-          "title": "Custom",
-          "value": "custom"
         }
       ]
-    },
-    {
-      "name": "customRpcUrl",
-      "title": "Custom RPC URL",
-      "description": "Enter your custom RPC URL (only used when Custom is selected above)",
-      "type": "textfield",
-      "required": false,
-      "placeholder": "https://your-custom-rpc.near.org"
     },
     {
       "name": "contractName",

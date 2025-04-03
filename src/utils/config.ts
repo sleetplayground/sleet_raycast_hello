@@ -2,8 +2,7 @@ import { getPreferenceValues } from "@raycast/api";
 
 interface Preferences {
   networkId: "mainnet" | "testnet";
-  rpcEndpoint: "default" | "fastnear" | "custom";
-  customRpcUrl?: string;
+  rpcEndpoint: "default" | "fastnear";
   contractName?: string;
 }
 
@@ -25,15 +24,10 @@ const DEFAULT_CONTRACTS = {
 
 export async function getNetworkConfig() {
   const preferences = getPreferenceValues<Preferences>();
-  const { networkId, rpcEndpoint, customRpcUrl, contractName } = preferences;
+  const { networkId, rpcEndpoint, contractName } = preferences;
 
   // Determine RPC URL
-  let nodeUrl = "";
-  if (rpcEndpoint === "custom" && customRpcUrl) {
-    nodeUrl = customRpcUrl;
-  } else {
-    nodeUrl = RPC_ENDPOINTS[networkId][rpcEndpoint as "default" | "fastnear"];
-  }
+  const nodeUrl = RPC_ENDPOINTS[networkId][rpcEndpoint];
 
   // Determine contract name
   const defaultContract = DEFAULT_CONTRACTS[networkId];
