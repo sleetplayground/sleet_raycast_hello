@@ -45,10 +45,14 @@ export default function Command() {
           icon={item.icon}
           actions={
             <ActionPanel>
-              <Action.OpenInTerminal
+              <Action.CreateTerminalCommand
                 title="Run Command"
                 command="bash"
                 args={["-c", item.command]}
+              />
+              <Action.CopyToClipboard
+                title="Copy Command"
+                content={item.command}
               />
             </ActionPanel>
           }
