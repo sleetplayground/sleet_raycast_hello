@@ -9,6 +9,10 @@ interface GreetingContract extends Contract {
 }
 
 export default async function Command() {
+  let greeting = "Failed to fetch greeting";
+  let contractAddress = "Error";
+  let networkId = "Error";
+
   try {
     const config = await getNetworkConfig();
     const keyStore = new keyStores.InMemoryKeyStore();
@@ -25,15 +29,9 @@ export default async function Command() {
       }
     ) as GreetingContract;
 
-    const greeting = await contract.get_greeting() || "No greeting set";
-
-    return (
-      <GreetingView
-        greeting={greeting}
-        contractAddress={contractId}
-        networkId={config.networkId}
-      />
-    );
+    greeting = await contract.get_greeting() || "No greeting set";
+    contractAddress = contractId;
+    networkId = config.networkId;
   } catch (error) {
     await showToast({
       style: Toast.Style.Failure,
@@ -41,4 +39,12 @@ export default async function Command() {
       message: error instanceof Error ? error.message : String(error),
     });
   }
+
+  return (
+    <GreetingView
+      greeting={greeting}
+      contractAddress={contractAddress}
+      networkId={networkId}
+    />
+  );
 }
