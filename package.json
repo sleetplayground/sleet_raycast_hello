@@ -18,8 +18,7 @@
       "name": "get-greeting",
       "title": "Get Greeting",
       "description": "Fetch and display the greeting from the NEAR blockchain",
-      "mode": "view",
-      "view": "src/views/GetGreeting.tsx"
+      "mode": "view"
     }
   ],
   "preferences": [

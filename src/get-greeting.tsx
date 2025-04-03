@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ActionPanel, List, Action } from "@raycast/api";
-import { getNetworkConfig } from "../utils/config";
+import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
 
 interface GreetingProps {
