@@ -80,7 +80,7 @@ export async function getNetworkAccounts(networkId: string): Promise<NearCredent
           console.log(`Skipping invalid credential file: ${fileName}`);
         }
       } catch (error) {
-        console.error(`Error processing file ${file}:`, error);
+        console.error(`Error processing file ${fileName}:`, error);
       }
     }
 

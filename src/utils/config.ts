@@ -7,6 +7,7 @@ interface Preferences {
   customRpcUrl?: string;
   contractName?: string;
   selectedAccount: string;
+  credentialsPath?: string;
   data?: Array<{
     title: string;
     value: string;
