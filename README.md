@@ -3,6 +3,7 @@
 A hello extension by Sleet for interacting with the near blockchain.
 
 > this app uses near api js, but makes use of near cli credidentials for signing trasactions
+> i also called this a hello extention for a lack of a better name, but it has a lot of commands and examples of what is possible to do with near api js and near blockchain.
 
 ---
 
@@ -33,6 +34,7 @@ check mark for if they are implemented!
 - [ ] create a meme token on meme cooking
 - [ ] install near cli
 - [ ] linktree
+- [ ] colorsnake
 
 ### commands
 
