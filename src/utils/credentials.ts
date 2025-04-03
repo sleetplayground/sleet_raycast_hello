@@ -1,11 +1,12 @@
 import { homedir } from "os";
 import { join } from "path";
 import { readFileSync, readdirSync } from "fs";
+import { KeyPairString } from "near-api-js/lib/utils/key_pair";
 
 interface AccountCredentials {
   account_id: string;
   public_key: string;
-  private_key: string;
+  private_key: KeyPairString;
 }
 
 interface NetworkCredentials {
