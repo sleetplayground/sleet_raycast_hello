@@ -16,10 +16,18 @@ interface AccountsJson {
   };
 }
 
-const CREDENTIALS_DIR = path.join(os.homedir(), ".near-credentials");
-const ACCOUNTS_JSON = path.join(CREDENTIALS_DIR, "accounts.json");
+let CREDENTIALS_DIR = path.join(os.homedir(), ".near-credentials");
+
+export function setCredentialsPath(customPath: string) {
+  CREDENTIALS_DIR = customPath;
+}
 
 export async function getNetworkAccounts(networkId: string): Promise<NearCredential[]> {
+  // Only allow mainnet and testnet networks
+  if (networkId !== 'mainnet' && networkId !== 'testnet') {
+    console.log(`Invalid network ID: ${networkId}. Only mainnet and testnet are supported.`);
+    return [];
+  }
   try {
     const networkDir = path.join(CREDENTIALS_DIR, networkId);
     if (!fs.existsSync(networkDir)) {
@@ -27,18 +35,27 @@ export async function getNetworkAccounts(networkId: string): Promise<NearCredent
       return [];
     }
 
-    const accountsJson: AccountsJson = fs.existsSync(ACCOUNTS_JSON) ? await fs.readJSON(ACCOUNTS_JSON) : {};
+    const accountsJsonPath = path.join(CREDENTIALS_DIR, "accounts.json");
+    const accountsJson: AccountsJson = fs.existsSync(accountsJsonPath)
+      ? await fs.readJSON(accountsJsonPath)
+      : {};
 
     const files = await fs.readdir(networkDir);
     const credentials: NearCredential[] = [];
 
     for (const file of files) {
-      if (!file.endsWith(".json")) continue;
-      const accountId = file.replace(".json", "");
-      const filePath = path.join(networkDir, file);
-
+      if (!file.endsWith('.json')) continue;
+      
       try {
+        const filePath = path.join(networkDir, file);
+        const stats = await fs.stat(filePath);
+        
+        // Skip directories, only process JSON files
+        if (stats.isDirectory()) continue;
+        
+        const accountId = file.replace('.json', '');
         const cred = await fs.readJSON(filePath);
+        
         if (cred && cred.account_id) {
           credentials.push({
             ...cred,
@@ -48,7 +65,7 @@ export async function getNetworkAccounts(networkId: string): Promise<NearCredent
           });
         }
       } catch (error) {
-        console.error(`Error reading credential file ${filePath}:`, error);
+        console.error(`Error processing file ${file}:`, error);
       }
     }
 
@@ -58,23 +75,4 @@ export async function getNetworkAccounts(networkId: string): Promise<NearCredent
     console.error(`Error getting accounts for network ${networkId}:`, error);
     return [];
   }
-}
-
-export async function getAllAccounts(): Promise<NearCredential[]> {
-  const networks = ["mainnet", "testnet"];
-  const allCredentials: NearCredential[] = [];
-
-  for (const network of networks) {
-    const networkCredentials = await getNetworkAccounts(network);
-    allCredentials.push(...networkCredentials);
-  }
-
-  return allCredentials;
-}
-
-export async function updateAccountLabel(accountId: string, label: string): Promise<void> {
-  const accountsJson: AccountsJson = fs.existsSync(ACCOUNTS_JSON) ? await fs.readJSON(ACCOUNTS_JSON) : {};
-
-  accountsJson[accountId] = { ...accountsJson[accountId], label };
-  await fs.writeJSON(ACCOUNTS_JSON, accountsJson, { spaces: 2 });
 }
