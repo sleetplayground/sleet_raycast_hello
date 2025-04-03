@@ -1,25 +1,31 @@
 import { showToast, Toast } from "@raycast/api";
-import { connect, keyStores, utils } from "near-api-js";
-import { getConfig } from "./utils/config";
+import { connect, keyStores, Contract } from "near-api-js";
+import { getNetworkConfig } from "./utils/config";
+import type { FC } from "react";
 import GreetingView from "./components/GreetingView";
+
+interface GreetingContract extends Contract {
+  get_greeting(): Promise<string>;
+}
 
 export default async function Command() {
   try {
-    const config = getConfig();
+    const config = await getNetworkConfig();
     const keyStore = new keyStores.InMemoryKeyStore();
     const near = await connect({ ...config, keyStore });
 
-    const contractId = config.networkId === "mainnet" ? "hello.sleet.near" : "hello.sleet.testnet";
-    const contract = new utils.Contract(
+    const contractId = config.contractName;
+    const contract = new Contract(
       await near.account(""),
       contractId,
       {
         viewMethods: ["get_greeting"],
         changeMethods: [],
+        useLocalViewExecution: true
       }
-    );
+    ) as GreetingContract;
 
-    const greeting = await contract.get_greeting();
+    const greeting = await contract.get_greeting() || "No greeting set";
 
     return (
       <GreetingView
