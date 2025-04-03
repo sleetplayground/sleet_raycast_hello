@@ -9,10 +9,12 @@ A hello extension by Sleet for interacting with the near blockchain.
 ```sh
 pnpm install
 
-pnpm build
 pnpm dev
 pnpm lint
 
+# build && publish
+pnpm build
+pnpm publish
 ```
 
 ---
