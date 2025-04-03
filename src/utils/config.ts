@@ -23,7 +23,7 @@ const DEFAULT_CONTRACTS = {
 
 export async function getNetworkConfig() {
   const preferences = getPreferenceValues<Preferences>();
-  const { networkId, rpcEndpoint, contractName } = preferences;
+  const { networkId, rpcEndpoint } = preferences;
 
   // Determine RPC URL
   const nodeUrl = RPC_ENDPOINTS[networkId][rpcEndpoint];
