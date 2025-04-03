@@ -27,9 +27,7 @@ check mark for if they are implemented!
 - [x] get the greeting from hello.sleet.near/.testnet on mainnet and testnet
 - [X] update the greeting
 - [ ] create new near account, a *.user.raycast.near
-- [ ] backup/save your near account info to a markdown file
-- [ ] lable your public keys and save to a markdown file
-- [ ] open web4 sites in browser
+- [ ] open web4 sites in browser, awesomeweb4
 - [ ] create a meme token on meme cooking
 - [ ] linktree
 - [ ] colorsnake
