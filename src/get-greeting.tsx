@@ -53,7 +53,7 @@ ${greeting}
 - **RPC Endpoint:** ${nodeUrl}
 
 ## NEAR CLI Command
-\`near view ${contractName} get_greeting --networkId ${networkId} --nodeUrl ${nodeUrl}\`
+\`near view ${contractName} get_greeting --networkId ${networkId}\`
 
 ---
 *Click the refresh button to update the greeting or copy the CLI command to interact via terminal*
@@ -65,7 +65,7 @@ ${greeting}
       actions={
         <ActionPanel>
           <Action title="Refresh Greeting" onAction={refreshGreeting} />
-          <Action title="Copy NEAR CLI Command" onAction={() => Clipboard.copy(`near view ${contractName} get_greeting --networkId ${networkId} --nodeUrl ${nodeUrl}`)} />
+          <Action title="Copy NEAR CLI Command" onAction={() => Clipboard.copy(`near view ${contractName} get_greeting --networkId ${networkId}`)} />
         </ActionPanel>
       }
     />
