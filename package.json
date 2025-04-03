@@ -50,6 +50,14 @@
 
   "preferences": [
     {
+      "name": "credentialsPath",
+      "title": "NEAR Credentials Path",
+      "description": "Path to your NEAR credentials directory (defaults to ~/.near-credentials)",
+      "type": "textfield",
+      "required": false,
+      "placeholder": "~/.near-credentials"
+    },
+    {
       "name": "selectedAccount",
       "title": "NEAR Account",
       "description": "Select which NEAR account to use for transactions (optional)",
@@ -119,6 +127,7 @@
       "required": false,
       "placeholder": "hello.sleet.testnet"
     }
+
   ],
 
   

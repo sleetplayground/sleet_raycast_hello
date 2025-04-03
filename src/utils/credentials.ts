@@ -54,20 +54,19 @@ export async function getNetworkAccounts(networkId: string): Promise<NearCredent
     console.log(`Found ${files.length} files in ${networkDir}`);
     const credentials: NearCredential[] = [];
 
-    for (const file of files) {
-      if (!file.endsWith('.json')) continue;
-      
+    // Only process JSON files in the network directory
+    for (const fileName of files) {
       try {
-        const filePath = path.join(networkDir, file);
-        const stats = await fs.stat(filePath);
-        
-        // Skip directories, only process JSON files
-        if (stats.isDirectory()) continue;
-        
-        const accountId = file.replace('.json', '');
+        if (!fileName.endsWith('.json')) continue;
+
+        const filePath = path.join(networkDir, fileName);
+        const fileStats = await fs.stat(filePath);
+        if (!fileStats.isFile()) continue;
+
+        const accountId = fileName.slice(0, -5); // Remove '.json'
         const cred = await fs.readJSON(filePath);
-        
-        if (cred && cred.account_id) {
+
+        if (cred && cred.account_id && cred.public_key && cred.private_key) {
           const credential: NearCredential = {
             account_id: accountId,
             public_key: cred.public_key,
@@ -77,6 +76,8 @@ export async function getNetworkAccounts(networkId: string): Promise<NearCredent
           };
           console.log(`Found valid credential for account: ${accountId}`);
           credentials.push(credential);
+        } else {
+          console.log(`Skipping invalid credential file: ${fileName}`);
         }
       } catch (error) {
         console.error(`Error processing file ${file}:`, error);

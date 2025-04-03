@@ -1,5 +1,5 @@
 import { getPreferenceValues } from "@raycast/api";
-import { getNetworkAccounts } from "./credentials";
+import { getNetworkAccounts, setCredentialsPath } from "./credentials";
 
 interface Preferences {
   networkId: "mainnet" | "testnet";
@@ -32,7 +32,12 @@ const DEFAULT_CONTRACTS = {
 
 export async function getNetworkConfig() {
   const preferences = getPreferenceValues<Preferences>();
-  const { networkId, rpcEndpoint, customRpcUrl, contractName, selectedAccount } = preferences;
+  const { networkId, rpcEndpoint, customRpcUrl, contractName, selectedAccount, credentialsPath } = preferences;
+
+  // Set custom credentials path if provided
+  if (credentialsPath) {
+    setCredentialsPath(credentialsPath);
+  }
 
   // Determine RPC URL
   let nodeUrl = "";
