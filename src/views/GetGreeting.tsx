@@ -20,10 +20,15 @@ const GetGreeting = () => {
     setNetworkId(networkId);
 
     const near = await connect({ nodeUrl, networkId });
-    const contract = new Contract(near.account(), contractName, {
+    const account = await near.account();
+    interface GreetingContract extends Contract {
+      getGreeting(): Promise<string>;
+    }
+    const contract = new Contract(account, contractName, {
       viewMethods: ["getGreeting"],
       changeMethods: [],
-    });
+      useLocalViewExecution: true
+    }) as GreetingContract;
 
     const greeting = await contract.getGreeting();
     setGreeting(greeting);
