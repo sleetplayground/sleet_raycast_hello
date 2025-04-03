@@ -22,9 +22,18 @@ export function getAvailableAccounts(networkId: string): AccountCredentials[] {
     files.forEach((file) => {
       if (file.endsWith(".json")) {
         try {
+          const accountId = file.slice(0, -5); // Remove .json extension
           const filePath = join(credentialsPath, file);
           const content = readFileSync(filePath, "utf8");
-          const credentials = JSON.parse(content) as AccountCredentials;
+          const rawCredentials = JSON.parse(content);
+          
+          // Extract only needed fields
+          const credentials: AccountCredentials = {
+            account_id: accountId,
+            private_key: rawCredentials.private_key,
+            public_key: rawCredentials.public_key
+          };
+          
           accounts.push(credentials);
         } catch (error) {
           console.error(`Error reading credentials file ${file}:`, error);
