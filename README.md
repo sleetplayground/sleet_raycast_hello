@@ -25,7 +25,7 @@ pnpm publish
 ### what can you do with this extension
 check mark for if they are implemented!
 - [x] get the greeting from hello.sleet.near/.testnet on mainnet and testnet
-- [ ] update the greeting
+- [X] update the greeting
 - [ ] login with near private key
 - [ ] create new near account, a *.user.raycast.near
 - [ ] backup/save your near account info to a markdown file
