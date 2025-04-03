@@ -20,14 +20,18 @@ let CREDENTIALS_DIR = path.join(os.homedir(), ".near-credentials");
 
 export function setCredentialsPath(customPath: string) {
   CREDENTIALS_DIR = customPath;
+  console.log(`Credentials directory set to: ${CREDENTIALS_DIR}`);
 }
 
 export async function getNetworkAccounts(networkId: string): Promise<NearCredential[]> {
+  console.log(`Searching for accounts in: ${CREDENTIALS_DIR}`);
+
   // Only allow mainnet and testnet networks
   if (networkId !== 'mainnet' && networkId !== 'testnet') {
     console.log(`Invalid network ID: ${networkId}. Only mainnet and testnet are supported.`);
     return [];
   }
+
   try {
     const networkDir = path.join(CREDENTIALS_DIR, networkId);
     if (!fs.existsSync(networkDir)) {
@@ -36,11 +40,18 @@ export async function getNetworkAccounts(networkId: string): Promise<NearCredent
     }
 
     const accountsJsonPath = path.join(CREDENTIALS_DIR, "accounts.json");
-    const accountsJson: AccountsJson = fs.existsSync(accountsJsonPath)
-      ? await fs.readJSON(accountsJsonPath)
-      : {};
+    let accountsJson: AccountsJson = {};
+    try {
+      if (fs.existsSync(accountsJsonPath)) {
+        accountsJson = await fs.readJSON(accountsJsonPath);
+        console.log(`Found accounts.json with ${Object.keys(accountsJson).length} entries`);
+      }
+    } catch (error) {
+      console.error(`Error reading accounts.json:`, error);
+    }
 
     const files = await fs.readdir(networkDir);
+    console.log(`Found ${files.length} files in ${networkDir}`);
     const credentials: NearCredential[] = [];
 
     for (const file of files) {
@@ -57,12 +68,15 @@ export async function getNetworkAccounts(networkId: string): Promise<NearCredent
         const cred = await fs.readJSON(filePath);
         
         if (cred && cred.account_id) {
-          credentials.push({
-            ...cred,
+          const credential: NearCredential = {
             account_id: accountId,
+            public_key: cred.public_key,
+            private_key: cred.private_key,
             network_id: networkId,
-            label: accountsJson[accountId]?.label || accountId,
-          });
+            label: accountsJson[accountId]?.label || accountId
+          };
+          console.log(`Found valid credential for account: ${accountId}`);
+          credentials.push(credential);
         }
       } catch (error) {
         console.error(`Error processing file ${file}:`, error);
