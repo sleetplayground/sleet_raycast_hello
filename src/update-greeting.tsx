@@ -91,11 +91,15 @@ export default function UpdateGreeting() {
       isLoading={isLoading}
       actions={
         <ActionPanel>
-          <Action.SubmitForm onSubmit={handleSubmit} />
+          <Action.SubmitForm title="Update Greeting" onSubmit={handleSubmit} />
         </ActionPanel>
       }
     >
-      <Form.Dropdown id="account" title="Account">
+      <Form.Dropdown 
+        id="account" 
+        title="Account"
+        info="Select the NEAR account that will be used to update the greeting"
+      >
         {accounts.map((account) => (
           <Form.Dropdown.Item
             key={account.value}
@@ -108,6 +112,7 @@ export default function UpdateGreeting() {
         id="greeting"
         title="New Greeting"
         placeholder="Enter your new greeting"
+        info="The new greeting message that will be stored on the NEAR blockchain"
       />
     </Form>
   );
