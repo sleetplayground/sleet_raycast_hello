@@ -20,7 +20,7 @@ const GetGreeting = () => {
     setNetworkId(networkId);
 
     const near = await connect({ nodeUrl, networkId });
-    const account = await near.account();
+    const account = await near.account(contractName);
     interface GreetingContract extends Contract {
       getGreeting(): Promise<string>;
     }
