@@ -1,5 +1,6 @@
 import { List, Icon, ActionPanel, Action } from "@raycast/api";
 
+
 interface NearCommand {
   title: string;
   command: string;
@@ -45,12 +46,8 @@ export default function Command() {
           icon={item.icon}
           actions={
             <ActionPanel>
-              <Action.OpenInTerminal
-                title="Run Command"
-                command={item.command}
-              />
               <Action.CopyToClipboard
-                title="Copy Command"
+                title="Copy NEAR CLI Command"
                 content={item.command}
               />
             </ActionPanel>
