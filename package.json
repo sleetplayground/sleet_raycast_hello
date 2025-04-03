@@ -85,14 +85,6 @@
           "value": "fastnear"
         }
       ]
-    },
-    {
-      "name": "contractName",
-      "title": "Greeting Contract",
-      "description": "The greeting contract to interact with (defaults to hello.sleet.near/.testnet)",
-      "type": "textfield",
-      "required": false,
-      "placeholder": "hello.sleet.testnet"
     }
 
   ],
