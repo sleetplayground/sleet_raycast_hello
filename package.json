@@ -51,6 +51,9 @@
       "mode": "no-view"
     }
   ],
+
+
+
   "preferences": [
     {
       "name": "networkId",
@@ -71,17 +74,39 @@
       ]
     },
     {
-      "name": "nodeUrl",
-      "title": "RPC Node URL",
-      "description": "Custom RPC node URL (optional)",
+      "name": "rpcEndpoint",
+      "title": "RPC Endpoint",
+      "description": "Select the RPC endpoint for the chosen network",
+      "type": "dropdown",
+      "required": true,
+      "default": "default",
+      "data": [
+        {
+          "title": "Default (NEAR)",
+          "value": "default"
+        },
+        {
+          "title": "FastNEAR",
+          "value": "fastnear"
+        },
+        {
+          "title": "Custom",
+          "value": "custom"
+        }
+      ]
+    },
+    {
+      "name": "customRpcUrl",
+      "title": "Custom RPC URL",
+      "description": "Enter your custom RPC URL (only used when Custom is selected above)",
       "type": "textfield",
       "required": false,
-      "placeholder": "https://rpc.testnet.near.org"
+      "placeholder": "https://your-custom-rpc.near.org"
     },
     {
       "name": "contractName",
-      "title": "Contract Name",
-      "description": "The contract to interact with",
+      "title": "Greeting Contract",
+      "description": "The greeting contract to interact with (defaults to hello.sleet.near/.testnet)",
       "type": "textfield",
       "required": false,
       "placeholder": "hello.sleet.testnet"
@@ -95,6 +120,8 @@
       "default": true
     }
   ],
+
+  
   "dependencies": {
     "@raycast/api": "^1.94.3",
     "@raycast/utils": "^1.17.0",
