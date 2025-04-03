@@ -31,6 +31,6 @@ export async function getNetworkConfig() {
   return {
     networkId,
     nodeUrl,
-    contractName: DEFAULT_CONTRACTS[networkId]
+    contractName: DEFAULT_CONTRACTS[networkId],
   };
 }

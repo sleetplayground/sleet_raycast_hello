@@ -13,7 +13,15 @@
     "Developer Tools"
   ],
   "license": "MIT",
-  "commands": [],
+  "commands": [
+    {
+      "name": "get-greeting",
+      "title": "Get Greeting",
+      "description": "Fetch and display the greeting from the NEAR blockchain",
+      "mode": "view",
+      "view": "src/views/GetGreeting.tsx"
+    }
+  ],
   "preferences": [
     {
       "name": "networkId",
@@ -55,7 +63,8 @@
   "dependencies": {
     "@raycast/api": "^1.94.3",
     "@raycast/utils": "^1.17.0",
-    "near-api-js": "^5.1.1"
+    "near-api-js": "^5.1.1",
+    "react": "^19.1.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",

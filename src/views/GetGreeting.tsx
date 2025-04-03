@@ -1,0 +1,51 @@
+import React, { useState, useEffect } from "react";
+import { ActionPanel, List, Action, getPreferenceValues } from "@raycast/api";
+import { getNetworkConfig } from "../utils/config";
+import { connect, Contract } from "near-api-js";
+
+interface GreetingProps {
+  greeting: string;
+  contractName: string;
+  networkId: string;
+}
+
+const GetGreeting = () => {
+  const [greeting, setGreeting] = useState<string>("");
+  const [contractName, setContractName] = useState<string>("");
+  const [networkId, setNetworkId] = useState<string>("");
+
+  useEffect(() => {
+    const fetchGreeting = async () => {
+      const { nodeUrl, contractName, networkId } = await getNetworkConfig();
+      setContractName(contractName);
+      setNetworkId(networkId);
+
+      const near = await connect({ nodeUrl, networkId });
+      const contract = new Contract(near.account(), contractName, {
+        viewMethods: ["getGreeting"],
+        changeMethods: [],
+      });
+
+      const greeting = await contract.getGreeting();
+      setGreeting(greeting);
+    };
+
+    fetchGreeting();
+  }, []);
+
+  return (
+    <List>
+      <List.Item
+        title={`Greeting: ${greeting}`}
+        subtitle={`Contract: ${contractName} | Network: ${networkId}`}
+        actions={
+          <ActionPanel>
+            <Action title="Refresh Greeting" onAction={() => window.location.reload()} />
+          </ActionPanel>
+        }
+      />
+    </List>
+  );
+};
+
+export default GetGreeting;
