@@ -13,7 +13,7 @@ export default function Command() {
     {
       title: "Install NEAR CLI",
       command: "curl --proto '=https' --tlsv1.2 -LsSf https://github.com/near/near-cli-rs/releases/latest/download/near-cli-rs-installer.sh | sh",
-      description: "Install the NEAR CLI tool",
+      description: "Install the NEAR CLI with curl",
       icon: Icon.Download,
     },
     {
