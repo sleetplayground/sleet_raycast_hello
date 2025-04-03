@@ -18,7 +18,7 @@
       "name": "get-greeting",
       "title": "get greeting",
       "description": "get the greeting from hello.sleet.near",
-      "mode": "no-view"
+      "mode": "view"
     },
     {
       "name": "update-greeting",
