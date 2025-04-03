@@ -50,7 +50,7 @@ export default async function Command() {
     const result = await account.functionCall({
       contractId: contractName,
       methodName: 'set_greeting',
-      args: { message: newGreeting },
+      args: { greeting: newGreeting },
       gas: utils.format.parseNearAmount('0.00000000003')!, // 30 Tgas
       attachedDeposit: utils.format.parseNearAmount('0')!, // 0 NEAR
     });
