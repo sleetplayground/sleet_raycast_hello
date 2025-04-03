@@ -32,6 +32,7 @@ check mark for if they are implemented!
 - [ ] open web4 sites in browser
 - [ ] create a meme token on meme cooking
 - [ ] install near cli
+- [ ] linktree
 
 ### commands
 
