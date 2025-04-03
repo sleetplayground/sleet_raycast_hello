@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ActionPanel, List, Action } from "@raycast/api";
+import { ActionPanel, Detail, Action } from "@raycast/api";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
 
@@ -38,18 +38,29 @@ const GetGreeting = () => {
     refreshGreeting();
   }, []);
 
+  const markdown = `
+# Sleet Greeting
+
+## Current Greeting
+${greeting}
+
+## Details
+- **Contract Name:** ${contractName}
+- **Network:** ${networkId}
+
+---
+*Click the refresh button to update the greeting*
+  `;
+
   return (
-    <List>
-      <List.Item
-        title={`Greeting: ${greeting}`}
-        subtitle={`Contract: ${contractName} | Network: ${networkId}`}
-        actions={
-          <ActionPanel>
-            <Action title="Refresh Greeting" onAction={refreshGreeting} />
-          </ActionPanel>
-        }
-      />
-    </List>
+    <Detail
+      markdown={markdown}
+      actions={
+        <ActionPanel>
+          <Action title="Refresh Greeting" onAction={refreshGreeting} />
+        </ActionPanel>
+      }
+    />
   );
 };
 
