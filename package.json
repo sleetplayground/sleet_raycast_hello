@@ -29,6 +29,14 @@
       "view": "UpdateGreeting"
     },
     {
+      "name": "web4-apps",
+      "title": "Browse Web4 Apps",
+      "description": "Browse and open Web4 apps on NEAR blockchain",
+      "mode": "view",
+      "icon": "web_globe_icon.png",
+      "view": "web4-apps"
+    },
+    {
       "name": "near-cli",
       "title": "NEAR CLI",
       "description": "Run NEAR CLI commands directly from Raycast",

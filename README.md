@@ -24,13 +24,18 @@ pnpm publish
 
 ### what can you do with this extension
 check mark for if they are implemented!
+
+hello.sleet
 - [x] get the greeting from hello.sleet.near/.testnet on mainnet and testnet
 - [X] update the greeting
 - [ ] create new near account, a *.user.raycast.near
-- [ ] open web4 sites in browser, awesomeweb4
 - [ ] create a meme token on meme cooking
 - [ ] linktree
 - [ ] colorsnake
+
+web4, awesomeweb4
+- [ ] discover and open web4 sites in browser
+- [ ] submit web4 app
 
 
 near cli commands
