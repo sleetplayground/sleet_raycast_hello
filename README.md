@@ -23,7 +23,7 @@ pnpm publish
 
 ### what can you do with this extension
 check mark for if they are implemented!
-- [ ] get the greeting from hello.sleet.near/.testnet on mainnet and testnet
+- [x] get the greeting from hello.sleet.near/.testnet on mainnet and testnet
 - [ ] update the greeting
 - [ ] login with near private key
 - [ ] create new near account, a *.user.raycast.near
@@ -31,6 +31,7 @@ check mark for if they are implemented!
 - [ ] lable your public keys and save to a markdown file
 - [ ] open web4 sites in browser
 - [ ] create a meme token on meme cooking
+- [ ] install near cli
 
 ### commands
 
