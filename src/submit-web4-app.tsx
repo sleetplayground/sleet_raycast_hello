@@ -56,7 +56,7 @@ export default function Command() {
   }, []);
 
   const handleFormChange = (field: string, value: string) => {
-    setFormValues(prev => ({ ...prev, [field]: value }));
+    setFormValues((prev) => ({ ...prev, [field]: value }));
   };
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function Command() {
         availableAccounts.map((acc) => ({
           value: acc.account_id,
           title: acc.account_id,
-        }))
+        })),
       );
     }
     loadAccounts();
@@ -91,15 +91,11 @@ export default function Command() {
       const contractAddress = networkId === "mainnet" ? "awesomeweb4.near" : "awesomeweb4.testnet";
       const account = await near.account(credentials.account_id);
 
-      const contract = new Contract(
-        account,
-        contractAddress,
-        {
-          viewMethods: ["get_apps"],
-          changeMethods: ["add_app", "update_app"],
-          useLocalViewExecution: true
-        }
-      ) as Web4Contract;
+      const contract = new Contract(account, contractAddress, {
+        viewMethods: ["get_apps"],
+        changeMethods: ["add_app", "update_app"],
+        useLocalViewExecution: true,
+      }) as Web4Contract;
 
       const app: Web4App = {
         title: values.title,
@@ -116,7 +112,7 @@ export default function Command() {
         facebook: values.facebook || undefined,
         telegram: values.telegram || undefined,
         symbol: values.symbol || undefined,
-        token_address: values.token_address || undefined
+        token_address: values.token_address || undefined,
       };
 
       const method = values.method === "add_app" ? "add_app" : "update_app";
@@ -150,7 +146,7 @@ export default function Command() {
         <ActionPanel>
           <Action.SubmitForm onSubmit={handleSubmit} />
           <Action
-            title="Copy NEAR CLI Command"
+            title="Copy Near Cli Command"
             shortcut={{ modifiers: ["cmd"], key: "c" }}
             onAction={() => {
               const cliCommand = `near call ${contractAddress} add_app '{"app":{"title":"${formValues.title}","dapp_account_id":"${formValues.account}","categories":["${formValues.category}"],"slug":"${formValues.slug}","oneliner":"${formValues.oneliner}","description":"${formValues.description}","logo_url":"${formValues.logo_url}"${formValues.github ? `,"github":"${formValues.github}"` : ""}${formValues.twitter ? `,"twitter":"${formValues.twitter}"` : ""}${formValues.medium ? `,"medium":"${formValues.medium}"` : ""}${formValues.discord ? `,"discord":"${formValues.discord}"` : ""}${formValues.facebook ? `,"facebook":"${formValues.facebook}"` : ""}${formValues.telegram ? `,"telegram":"${formValues.telegram}"` : ""}${formValues.symbol ? `,"symbol":"${formValues.symbol}"` : ""}${formValues.token_address ? `,"token_address":"${formValues.token_address}"` : ""}}}' --accountId ${formValues.account} --deposit 0.1`;
@@ -158,7 +154,7 @@ export default function Command() {
               showToast({
                 style: Toast.Style.Success,
                 title: "CLI Command Copied",
-                message: "Paste it in your terminal to execute"
+                message: "Paste it in your terminal to execute",
               });
             }}
           />
@@ -167,11 +163,7 @@ export default function Command() {
     >
       <Form.Dropdown id="method" title="Method" defaultValue="add_app">
         {METHODS.map((method) => (
-          <Form.Dropdown.Item
-            key={method.value}
-            value={method.value}
-            title={method.title}
-          />
+          <Form.Dropdown.Item key={method.value} value={method.value} title={method.title} />
         ))}
       </Form.Dropdown>
 
@@ -182,11 +174,7 @@ export default function Command() {
         onChange={(value) => handleFormChange("account", value)}
       >
         {accounts.map((account) => (
-          <Form.Dropdown.Item
-            key={account.value}
-            value={account.value}
-            title={account.title}
-          />
+          <Form.Dropdown.Item key={account.value} value={account.value} title={account.title} />
         ))}
       </Form.Dropdown>
 
@@ -211,11 +199,7 @@ export default function Command() {
         onChange={(value) => handleFormChange("category", value)}
       >
         {CATEGORIES.map((category) => (
-          <Form.Dropdown.Item
-            key={category.value}
-            value={category.value}
-            title={category.title}
-          />
+          <Form.Dropdown.Item key={category.value} value={category.value} title={category.title} />
         ))}
       </Form.Dropdown>
 

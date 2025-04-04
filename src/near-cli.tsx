@@ -1,6 +1,5 @@
 import { List, Icon, ActionPanel, Action } from "@raycast/api";
 
-
 interface NearCommand {
   title: string;
   command: string;
@@ -12,7 +11,8 @@ export default function Command() {
   const nearCommands: NearCommand[] = [
     {
       title: "Install NEAR CLI",
-      command: "curl --proto '=https' --tlsv1.2 -LsSf https://github.com/near/near-cli-rs/releases/latest/download/near-cli-rs-installer.sh | sh",
+      command:
+        "curl --proto '=https' --tlsv1.2 -LsSf https://github.com/near/near-cli-rs/releases/latest/download/near-cli-rs-installer.sh | sh",
       description: "Install the NEAR CLI with curl",
       icon: Icon.Download,
     },
@@ -70,10 +70,7 @@ export default function Command() {
           icon={item.icon}
           actions={
             <ActionPanel>
-              <Action.CopyToClipboard
-                title="Copy CLI Command"
-                content={item.command}
-              />
+              <Action.CopyToClipboard title="Copy Cli Command" content={item.command} />
             </ActionPanel>
           }
         />

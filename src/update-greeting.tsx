@@ -24,27 +24,25 @@ export default function UpdateGreeting() {
     const { networkId, contractName } = await getNetworkConfig();
     setContractName(contractName);
     const availableAccounts = getAvailableAccounts(networkId);
-    
+
     setAccounts(
       availableAccounts.map((acc) => ({
         value: acc.account_id,
         title: acc.account_id,
-      }))
+      })),
     );
     setIsLoading(false);
   };
 
   const handleFormChange = (field: keyof FormValues, value: string) => {
-    setFormValues(prev => ({ ...prev, [field]: value }));
+    setFormValues((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (values: FormValues) => {
     try {
       const { nodeUrl, networkId, contractName } = await getNetworkConfig();
       const availableAccounts = getAvailableAccounts(networkId);
-      const accountCredentials = availableAccounts.find(
-        (acc) => acc.account_id === values.account
-      );
+      const accountCredentials = availableAccounts.find((acc) => acc.account_id === values.account);
 
       if (!accountCredentials) {
         throw new Error("Account credentials not found");
@@ -62,15 +60,11 @@ export default function UpdateGreeting() {
         set_greeting(args: { greeting: string }): Promise<void>;
       }
 
-      const contract = new Contract(
-        account,
-        contractName,
-        {
-          viewMethods: ["get_greeting"],
-          changeMethods: ["set_greeting"],
-          useLocalViewExecution: true
-        }
-      ) as GreetingContract;
+      const contract = new Contract(account, contractName, {
+        viewMethods: ["get_greeting"],
+        changeMethods: ["set_greeting"],
+        useLocalViewExecution: true,
+      }) as GreetingContract;
 
       await contract.set_greeting({ greeting: values.greeting });
 
@@ -87,8 +81,8 @@ export default function UpdateGreeting() {
         message: error instanceof Error ? error.message : "Failed to update greeting",
         primaryAction: {
           title: "Retry",
-          onAction: () => handleSubmit(values)
-        }
+          onAction: () => handleSubmit(values),
+        },
       });
     }
   };
@@ -100,7 +94,7 @@ export default function UpdateGreeting() {
         <ActionPanel>
           <Action.SubmitForm title="Update Greeting" onSubmit={handleSubmit} />
           <Action
-            title="Copy NEAR CLI Command"
+            title="Copy Near Cli Command"
             shortcut={{ modifiers: ["cmd"], key: "c" }}
             onAction={() => {
               const cliCommand = `near call ${contractName} set_greeting '{"greeting":"${formValues.greeting}"}' --accountId ${formValues.account || accounts[0]?.value}`;
@@ -108,25 +102,21 @@ export default function UpdateGreeting() {
               showToast({
                 style: Toast.Style.Success,
                 title: "CLI Command Copied",
-                message: "Paste it in your terminal to execute"
+                message: "Paste it in your terminal to execute",
               });
             }}
           />
         </ActionPanel>
       }
     >
-      <Form.Dropdown 
-        id="account" 
+      <Form.Dropdown
+        id="account"
         title="Account"
         info="Select the NEAR account that will be used to update the greeting"
         onChange={(value) => handleFormChange("account", value)}
       >
         {accounts.map((account) => (
-          <Form.Dropdown.Item
-            key={account.value}
-            value={account.value}
-            title={account.title}
-          />
+          <Form.Dropdown.Item key={account.value} value={account.value} title={account.title} />
         ))}
       </Form.Dropdown>
       <Form.TextField

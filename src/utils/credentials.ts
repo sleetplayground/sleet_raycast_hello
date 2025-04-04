@@ -15,13 +15,13 @@ interface NetworkCredentials {
 
 export async function getCredentials(): Promise<AccountCredentials | null> {
   try {
-    const { networkId } = await import("./config").then(m => m.getNetworkConfig());
+    const { networkId } = await import("./config").then((m) => m.getNetworkConfig());
     const accounts = getAvailableAccounts(networkId);
-    
+
     if (accounts.length === 0) {
       return null;
     }
-    
+
     // Return the first available account
     return accounts[0];
   } catch (error) {
@@ -34,9 +34,9 @@ export function getAvailableAccounts(networkId: string): AccountCredentials[] {
   try {
     const credentialsPath = join(homedir(), ".near-credentials", networkId);
     const files = readdirSync(credentialsPath);
-    
+
     const accounts: AccountCredentials[] = [];
-    
+
     files.forEach((file) => {
       if (file.endsWith(".json")) {
         try {
@@ -44,21 +44,21 @@ export function getAvailableAccounts(networkId: string): AccountCredentials[] {
           const filePath = join(credentialsPath, file);
           const content = readFileSync(filePath, "utf8");
           const rawCredentials = JSON.parse(content);
-          
+
           // Extract only needed fields
           const credentials: AccountCredentials = {
             account_id: accountId,
             private_key: rawCredentials.private_key,
-            public_key: rawCredentials.public_key
+            public_key: rawCredentials.public_key,
           };
-          
+
           accounts.push(credentials);
         } catch (error) {
           console.error(`Error reading credentials file ${file}:`, error);
         }
       }
     });
-    
+
     return accounts;
   } catch (error) {
     console.error("Error reading credentials directory:", error);

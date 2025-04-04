@@ -30,7 +30,7 @@ const GetGreeting = () => {
     const contract = new Contract(account, contractName, {
       viewMethods: ["get_greeting"],
       changeMethods: [],
-      useLocalViewExecution: true
+      useLocalViewExecution: true,
     }) as GreetingContract;
 
     const greeting = await contract.get_greeting();
@@ -65,7 +65,10 @@ ${greeting}
       actions={
         <ActionPanel>
           <Action title="Refresh Greeting" onAction={refreshGreeting} />
-          <Action title="Copy NEAR CLI Command" onAction={() => Clipboard.copy(`near view ${contractName} get_greeting --networkId ${networkId}`)} />
+          <Action
+            title="Copy Near Cli Command"
+            onAction={() => Clipboard.copy(`near view ${contractName} get_greeting --networkId ${networkId}`)}
+          />
         </ActionPanel>
       }
     />

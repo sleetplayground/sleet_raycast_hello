@@ -1,4 +1,16 @@
-import { Action, ActionPanel, List, Icon, showToast, Toast, Form, useNavigation, Detail, open, Image } from "@raycast/api";
+import {
+  Action,
+  ActionPanel,
+  List,
+  Icon,
+  showToast,
+  Toast,
+  Form,
+  useNavigation,
+  Detail,
+  open,
+  Image,
+} from "@raycast/api";
 import { useState, useEffect } from "react";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
@@ -22,10 +34,10 @@ interface DetailViewProps {
 }
 
 function getMainAccountId(accountId: string): string {
-  if (accountId === 'web4.testnet' || accountId === 'web4.near') {
+  if (accountId === "web4.testnet" || accountId === "web4.near") {
     return accountId;
   }
-  return accountId.startsWith('web4.') ? accountId.substring(5) : accountId;
+  return accountId.startsWith("web4.") ? accountId.substring(5) : accountId;
 }
 
 function DetailView({ app }: DetailViewProps) {
@@ -34,7 +46,7 @@ function DetailView({ app }: DetailViewProps) {
 
   return (
     <Detail
-      markdown={app.logo_url ? `![${app.title}](${app.logo_url})` : ''}
+      markdown={app.logo_url ? `![${app.title}](${app.logo_url})` : ""}
       metadata={
         <Detail.Metadata>
           <Detail.Metadata.Label title="Title" text={app.title} />
@@ -65,15 +77,11 @@ export default function Command() {
         const near = await connect({ nodeUrl, networkId });
         const contractAddress = networkId === "mainnet" ? "awesomeweb4.near" : "awesomeweb4.testnet";
         const account = await near.account(contractAddress);
-        const contract = new Contract(
-          account,
-          contractAddress,
-          {
-            viewMethods: ["get_apps"],
-            changeMethods: [],
-            useLocalViewExecution: true
-          }
-        ) as Web4Contract;
+        const contract = new Contract(account, contractAddress, {
+          viewMethods: ["get_apps"],
+          changeMethods: [],
+          useLocalViewExecution: true,
+        }) as Web4Contract;
 
         const appsData = await contract.get_apps();
         const processedApps = appsData.map(([_, app]) => app as Web4App);
@@ -97,9 +105,9 @@ export default function Command() {
     if (!searchText) return true;
     const searchLower = searchText.toLowerCase();
     return (
-      (app.title || '').toLowerCase().includes(searchLower) ||
-      (app.dapp_account_id || '').toLowerCase().includes(searchLower) ||
-      ((app.description || '').toLowerCase().includes(searchLower))
+      (app.title || "").toLowerCase().includes(searchLower) ||
+      (app.dapp_account_id || "").toLowerCase().includes(searchLower) ||
+      (app.description || "").toLowerCase().includes(searchLower)
     );
   });
 
@@ -131,16 +139,12 @@ export default function Command() {
       {filteredApps.map((app) => (
         <List.Item
           key={app.dapp_account_id || `app-${Math.random()}`}
-          title={app.title || 'Untitled App'}
-          subtitle={app.dapp_account_id || 'Unknown Account'}
-          accessories={[{ text: app.oneliner || '' }]}
+          title={app.title || "Untitled App"}
+          subtitle={app.dapp_account_id || "Unknown Account"}
+          accessories={[{ text: app.oneliner || "" }]}
           actions={
             <ActionPanel>
-              <Action.Push
-                title="View Details"
-                target={<DetailView app={app} />}
-                icon={Icon.Sidebar}
-              />
+              <Action.Push title="View Details" target={<DetailView app={app} />} icon={Icon.Sidebar} />
               <Action.OpenInBrowser url={`https://${getMainAccountId(app.dapp_account_id)}.page`} />
             </ActionPanel>
           }
