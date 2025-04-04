@@ -13,5 +13,5 @@ here is what this version has.
 - [X] update the greeting
 - [x] near cli commands - copy them so you can run them in the terminal
 - [x] discover and open web4 sites in browser
-- [x] submit web4 apps
+- [x] submit web4 apps - has not been tested yet, but you can copy the cli command
 - [x] discover near dapps and open in the browser
