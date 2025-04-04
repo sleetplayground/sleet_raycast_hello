@@ -70,6 +70,15 @@ contract
 - meme-cooking.near
 - factory.v10.meme-cooking.testnet
 
+
+### Near Dapps
+
+- https://onsocial.id/ - social on near
+- https://meme.cooking/board - meme tokens on near
+- https://near.pumpopoly.com/?invite=sleet.near - Virtual RealEstate Crypto Game on near
+- https://dex.rhea.finance/points?code=zmDT0oI - DEX on near
+- https://wallet.meteorwallet.app/wallet - meteor wallet
+
 ---
 
 copyright: 2025 by sleet.near

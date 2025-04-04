@@ -54,6 +54,14 @@
       "mode": "view",
       "icon": "web_globe_icon.png",
       "view": "submit-web4-app"
+    },
+    {
+      "name": "near-dapps",
+      "title": "Browse NEAR DApps",
+      "description": "Discover and open popular NEAR ecosystem applications",
+      "mode": "view",
+      "icon": "web_globe_icon.png",
+      "view": "near-dapps"
     }
   ],
   "preferences": [
