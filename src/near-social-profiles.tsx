@@ -1,7 +1,5 @@
 import { ActionPanel, Action, Grid, List, Icon, showToast, Toast, Detail } from "@raycast/api";
 import { useState, useEffect } from "react";
-import { getNetworkConfig } from "./utils/config";
-import fetch from "node-fetch";
 
 interface Profile {
   accountId: string;
