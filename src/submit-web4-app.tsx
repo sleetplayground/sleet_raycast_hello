@@ -1,8 +1,8 @@
 import { Action, ActionPanel, Form, showToast, Toast, useNavigation } from "@raycast/api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract, utils } from "near-api-js";
-import { getCredentials } from "./utils/credentials";
+import { getCredentials, getAvailableAccounts } from "./utils/credentials";
 
 interface Web4Contract extends Contract {
   add_app(args: { app: Web4App }): Promise<void>;
@@ -17,6 +17,14 @@ interface Web4App {
   oneliner: string;
   description: string;
   logo_url: string;
+  github?: string;
+  twitter?: string;
+  medium?: string;
+  discord?: string;
+  facebook?: string;
+  telegram?: string;
+  symbol?: string;
+  token_address?: string;
 }
 
 const CATEGORIES = [
@@ -87,14 +95,14 @@ export default function Command() {
         oneliner: values.oneliner,
         description: values.description,
         logo_url: values.logo_url,
-        github: values.github || null,
-        twitter: values.twitter || null,
-        medium: values.medium || null,
-        discord: values.discord || null,
-        facebook: values.facebook || null,
-        telegram: values.telegram || null,
-        symbol: values.symbol || null,
-        token_address: values.token_address || null
+        github: values.github || undefined,
+        twitter: values.twitter || undefined,
+        medium: values.medium || undefined,
+        discord: values.discord || undefined,
+        facebook: values.facebook || undefined,
+        telegram: values.telegram || undefined,
+        symbol: values.symbol || undefined,
+        token_address: values.token_address || undefined
       };
 
       const method = values.method === "add_app" ? "add_app" : "update_app";
@@ -158,14 +166,12 @@ export default function Command() {
         id="title"
         title="App Title"
         placeholder="Enter your app title"
-        required
       />
 
       <Form.TextField
         id="slug"
         title="App Slug"
         placeholder="Enter a unique identifier for your app"
-        required
       />
 
       <Form.Dropdown id="category" title="Category" defaultValue="4">
@@ -182,21 +188,18 @@ export default function Command() {
         id="oneliner"
         title="One-liner"
         placeholder="Brief description of your app"
-        required
       />
 
       <Form.TextArea
         id="description"
         title="Description"
         placeholder="Detailed description of your app"
-        required
       />
 
       <Form.TextField
         id="logo_url"
         title="Logo URL"
         placeholder="URL to your app's logo"
-        required
       />
 
       <Form.TextField
