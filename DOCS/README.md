@@ -51,6 +51,10 @@ contract
 
 
 ### Near Social
+contract
+- v1.social08.testnet
+- social.near
+
 
 ```sh
 near call social.near set '{"data":{"your-account.near":{"profile":{"linktree":{"github":"https://github.com/yourusername","twitter":"https://twitter.com/yourhandle","website":"https://yourwebsite.com"}}}}}' --accountId your-account.near --amount 0.000000000000000000000001
