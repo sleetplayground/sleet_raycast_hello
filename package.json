@@ -54,14 +54,6 @@
       "mode": "view",
       "icon": "web_globe_icon.png",
       "view": "submit-web4-app"
-    },
-    {
-      "name": "near-social-profiles",
-      "title": "Browse NEAR Social Profiles",
-      "description": "Browse and search NEAR Social profiles with grid and list views",
-      "mode": "view",
-      "icon": "sleet_icon_trans.png",
-      "view": "near-social-profiles"
     }
   ],
   "preferences": [
