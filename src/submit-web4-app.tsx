@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Form, showToast, Toast, useNavigation } from "@raycast/api";
+import { Action, ActionPanel, Form, showToast, Toast, useNavigation, Clipboard } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract, utils } from "near-api-js";
@@ -44,6 +44,20 @@ export default function Command() {
   const { pop } = useNavigation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [accounts, setAccounts] = useState<{ value: string; title: string }[]>([]);
+  const [formValues, setFormValues] = useState<Record<string, string>>({});
+  const [contractAddress, setContractAddress] = useState("");
+
+  useEffect(() => {
+    async function loadConfig() {
+      const { networkId } = await getNetworkConfig();
+      setContractAddress(networkId === "mainnet" ? "awesomeweb4.near" : "awesomeweb4.testnet");
+    }
+    loadConfig();
+  }, []);
+
+  const handleFormChange = (field: string, value: string) => {
+    setFormValues(prev => ({ ...prev, [field]: value }));
+  };
 
   useEffect(() => {
     async function loadAccounts() {
@@ -135,6 +149,19 @@ export default function Command() {
       actions={
         <ActionPanel>
           <Action.SubmitForm onSubmit={handleSubmit} />
+          <Action
+            title="Copy NEAR CLI Command"
+            shortcut={{ modifiers: ["cmd"], key: "c" }}
+            onAction={() => {
+              const cliCommand = `near call ${contractAddress} add_app '{"app":{"title":"${formValues.title}","dapp_account_id":"${formValues.account}","categories":["${formValues.category}"],"slug":"${formValues.slug}","oneliner":"${formValues.oneliner}","description":"${formValues.description}","logo_url":"${formValues.logo_url}"${formValues.github ? `,"github":"${formValues.github}"` : ""}${formValues.twitter ? `,"twitter":"${formValues.twitter}"` : ""}${formValues.medium ? `,"medium":"${formValues.medium}"` : ""}${formValues.discord ? `,"discord":"${formValues.discord}"` : ""}${formValues.facebook ? `,"facebook":"${formValues.facebook}"` : ""}${formValues.telegram ? `,"telegram":"${formValues.telegram}"` : ""}${formValues.symbol ? `,"symbol":"${formValues.symbol}"` : ""}${formValues.token_address ? `,"token_address":"${formValues.token_address}"` : ""}}}' --accountId ${formValues.account} --deposit 0.1`;
+              Clipboard.copy(cliCommand);
+              showToast({
+                style: Toast.Style.Success,
+                title: "CLI Command Copied",
+                message: "Paste it in your terminal to execute"
+              });
+            }}
+          />
         </ActionPanel>
       }
     >
@@ -152,6 +179,7 @@ export default function Command() {
         id="account"
         title="Account"
         info="Select the NEAR account that will be used to submit the app"
+        onChange={(value) => handleFormChange("account", value)}
       >
         {accounts.map((account) => (
           <Form.Dropdown.Item
@@ -166,15 +194,22 @@ export default function Command() {
         id="title"
         title="App Title"
         placeholder="Enter your app title"
+        onChange={(value) => handleFormChange("title", value)}
       />
 
       <Form.TextField
         id="slug"
         title="App Slug"
         placeholder="Enter a unique identifier for your app"
+        onChange={(value) => handleFormChange("slug", value)}
       />
 
-      <Form.Dropdown id="category" title="Category" defaultValue="4">
+      <Form.Dropdown
+        id="category"
+        title="Category"
+        defaultValue="4"
+        onChange={(value) => handleFormChange("category", value)}
+      >
         {CATEGORIES.map((category) => (
           <Form.Dropdown.Item
             key={category.value}
@@ -188,66 +223,77 @@ export default function Command() {
         id="oneliner"
         title="One-liner"
         placeholder="Brief description of your app"
+        onChange={(value) => handleFormChange("oneliner", value)}
       />
 
       <Form.TextArea
         id="description"
         title="Description"
         placeholder="Detailed description of your app"
+        onChange={(value) => handleFormChange("description", value)}
       />
 
       <Form.TextField
         id="logo_url"
         title="Logo URL"
         placeholder="URL to your app's logo"
+        onChange={(value) => handleFormChange("logo_url", value)}
       />
 
       <Form.TextField
         id="github"
         title="GitHub"
         placeholder="Your GitHub username or repository URL"
+        onChange={(value) => handleFormChange("github", value)}
       />
 
       <Form.TextField
         id="twitter"
         title="Twitter"
         placeholder="Your Twitter handle"
+        onChange={(value) => handleFormChange("twitter", value)}
       />
 
       <Form.TextField
         id="medium"
         title="Medium"
         placeholder="Your Medium username"
+        onChange={(value) => handleFormChange("medium", value)}
       />
 
       <Form.TextField
         id="discord"
         title="Discord"
         placeholder="Discord server invite link"
+        onChange={(value) => handleFormChange("discord", value)}
       />
 
       <Form.TextField
         id="facebook"
         title="Facebook"
         placeholder="Facebook page URL"
+        onChange={(value) => handleFormChange("facebook", value)}
       />
 
       <Form.TextField
         id="telegram"
         title="Telegram"
         placeholder="Telegram group or channel link"
+        onChange={(value) => handleFormChange("telegram", value)}
       />
 
       <Form.TextField
         id="symbol"
         title="Symbol"
         placeholder="Token symbol (if applicable)"
+        onChange={(value) => handleFormChange("symbol", value)}
       />
 
       <Form.TextField
         id="token_address"
         title="Token Address"
         placeholder="Token contract address (if applicable)"
+        onChange={(value) => handleFormChange("token_address", value)}
       />
 
       <Form.Description
