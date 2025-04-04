@@ -27,10 +27,31 @@ export default function Command() {
     fetchProfiles();
   }, []);
 
-  async function fetchProfiles() {
+  const [lastAccountId, setLastAccountId] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
+
+  async function fetchProfiles(loadMore = false) {
     try {
-      const profileList = await fetchNearSocialProfiles();
-      setProfiles(profileList);
+      if (!loadMore) {
+        setProfiles([]);
+        setLastAccountId(null);
+        setHasMore(true);
+      }
+
+      if (!hasMore && loadMore) {
+        return;
+      }
+
+      const options = {
+        limit: 50,
+        fromIndex: loadMore ? lastAccountId : undefined
+      };
+
+      const { profiles: newProfiles, lastAccountId: newLastAccountId } = await fetchNearSocialProfiles(options);
+
+      setProfiles(prevProfiles => loadMore ? [...prevProfiles, ...newProfiles] : newProfiles);
+      setLastAccountId(newLastAccountId);
+      setHasMore(newProfiles.length === options.limit);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching profiles:', error);
@@ -41,7 +62,7 @@ export default function Command() {
         message: errorMessage,
         primaryAction: {
           title: "Retry",
-          onAction: fetchProfiles
+          onAction: () => fetchProfiles(loadMore)
         }
       });
       setLoading(false);
