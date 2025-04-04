@@ -4,7 +4,7 @@ import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
 
 interface Web4Contract extends Contract {
-  get_apps(): Promise<Web4App[]>;
+  get_apps(): Promise<[number, Web4App][]>;
 }
 
 interface Web4App {
@@ -66,8 +66,9 @@ export default function Command() {
           }
         ) as Web4Contract;
 
-        const apps = await contract.get_apps();
-        setApps(apps);
+        const appsData = await contract.get_apps();
+        const processedApps = appsData.map(([_, app]) => app as Web4App);
+        setApps(processedApps);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching apps:", error);
@@ -120,10 +121,10 @@ export default function Command() {
     >
       {filteredApps.map((app) => (
         <List.Item
-          key={app.dapp_account_id}
-          title={app.title}
-          subtitle={app.dapp_account_id}
-          accessories={[{ text: app.oneliner }]}
+          key={app.dapp_account_id || `app-${Math.random()}`}
+          title={app.title || 'Untitled App'}
+          subtitle={app.dapp_account_id || 'Unknown Account'}
+          accessories={[{ text: app.oneliner || '' }]}
           actions={
             <ActionPanel>
               <Action.Push
