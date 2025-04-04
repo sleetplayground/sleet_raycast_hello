@@ -16,17 +16,12 @@ export interface Profile {
 export async function fetchNearSocialProfiles(): Promise<Profile[]> {
   try {
     const social = new Social({
-      networkId: 'mainnet',
+      network: 'mainnet',
       contractId: 'social.near'
     });
 
     const searchResults = await social.get({
-      keys: [`*/profile/*`],
-      options: {
-        limit: 100,
-        order: 'desc',
-        return_type: 'BlockHeight'
-      }
+      keys: [`*/profile/*`]
     });
 
     if (!searchResults || typeof searchResults !== 'object') {

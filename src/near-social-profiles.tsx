@@ -1,5 +1,6 @@
 import { ActionPanel, Action, Grid, List, Icon, showToast, Toast, Detail } from "@raycast/api";
 import { useState, useEffect } from "react";
+import { fetchNearSocialProfiles } from "./utils/near-social";
 
 interface Profile {
   accountId: string;
