@@ -1,4 +1,4 @@
-import { Action, ActionPanel, List, Icon, showToast, Toast, Form, useNavigation, Detail, open } from "@raycast/api";
+import { Action, ActionPanel, List, Icon, showToast, Toast, Form, useNavigation, Detail, open, Image } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
@@ -21,13 +21,29 @@ interface DetailViewProps {
   app: Web4App;
 }
 
+function getMainAccountId(accountId: string): string {
+  return accountId.startsWith('web4.') ? accountId.substring(5) : accountId;
+}
+
 function DetailView({ app }: DetailViewProps) {
-  const web4Url = `${app.dapp_account_id}.page`;
+  const mainAccountId = getMainAccountId(app.dapp_account_id);
+  const web4Url = `${mainAccountId}.page`;
 
   return (
     <Detail
       metadata={
         <Detail.Metadata>
+          {app.logo_url && (
+            <Detail.Metadata.TagList title="Logo">
+              <Detail.Metadata.TagList.Item
+                text=""
+                icon={{
+                  source: app.logo_url,
+                  mask: Image.Mask.RoundedRectangle
+                }}
+              />
+            </Detail.Metadata.TagList>
+          )}
           <Detail.Metadata.Label title="Title" text={app.title} />
           <Detail.Metadata.Label title="Account" text={app.dapp_account_id} />
           <Detail.Metadata.Label title="Web4 URL" text={web4Url} />
@@ -132,7 +148,7 @@ export default function Command() {
                 target={<DetailView app={app} />}
                 icon={Icon.Sidebar}
               />
-              <Action.OpenInBrowser url={`https://${app.dapp_account_id}.page`} />
+              <Action.OpenInBrowser url={`https://${getMainAccountId(app.dapp_account_id)}.page`} />
             </ActionPanel>
           }
         />
