@@ -1,13 +1,4 @@
-import {
-  Action,
-  ActionPanel,
-  List,
-  Icon,
-  showToast,
-  Toast,
-  Detail,
-  open
-} from "@raycast/api";
+import { Action, ActionPanel, List, Icon, showToast, Toast, Detail, open } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
@@ -81,7 +72,7 @@ export default function Command() {
         }) as Web4Contract;
 
         const appsData = await contract.get_apps();
-        const processedApps = appsData.map(([_, app]) => app as Web4App);
+        const processedApps = appsData.map(([, app]) => app as Web4App);
         setApps(processedApps);
         setIsLoading(false);
       } catch (error) {

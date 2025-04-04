@@ -9,10 +9,6 @@ export interface AccountCredentials {
   private_key: KeyPairString;
 }
 
-interface NetworkCredentials {
-  [accountId: string]: AccountCredentials;
-}
-
 export async function getCredentials(): Promise<AccountCredentials | null> {
   try {
     const { networkId } = await import("./config").then((m) => m.getNetworkConfig());

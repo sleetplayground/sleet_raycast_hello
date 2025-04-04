@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Form, showToast, Toast, useNavigation, Clipboard } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { getNetworkConfig } from "./utils/config";
-import { connect, Contract, utils } from "near-api-js";
+import { connect, Contract } from "near-api-js";
 import { getCredentials, getAvailableAccounts } from "./utils/credentials";
 
 interface Web4Contract extends Contract {
@@ -116,8 +116,6 @@ export default function Command() {
       };
 
       const method = values.method === "add_app" ? "add_app" : "update_app";
-      const deposit = utils.format.parseNearAmount("0.1");
-
       await contract[method]({ app });
 
       showToast({
