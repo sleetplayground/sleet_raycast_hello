@@ -54,6 +54,14 @@
       "mode": "view",
       "icon": "web_globe_icon.png",
       "view": "submit-web4-app"
+    },
+    {
+      "name": "near-social-profiles",
+      "title": "Browse NEAR Social Profiles",
+      "description": "Browse and search NEAR Social profiles with grid and list views",
+      "mode": "view",
+      "icon": "sleet_icon_trans.png",
+      "view": "near-social-profiles"
     }
   ],
   "preferences": [
@@ -97,12 +105,15 @@
   "dependencies": {
     "@raycast/api": "^1.94.3",
     "@raycast/utils": "^1.17.0",
+    "@builddao/near-social-js": "^0.1.0",
     "near-api-js": "^5.1.1",
+    "node-fetch": "^2.7.0",
     "react": "^19.1.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
     "@types/node": "22.13.10",
+    "@types/node-fetch": "^2.6.12",
     "@types/react": "19.0.10",
     "eslint": "^9.22.0",
     "prettier": "^3.5.3",
