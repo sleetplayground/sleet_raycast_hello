@@ -5,7 +5,6 @@
   "description": "A hello extension by Sleet for interacting with the near blockchain.",
   "icon": "sleet_icon_trans.png",
   "author": "nonresistant",
-  "owner": "sleet",
   "categories": [
     "Finance",
     "Security",
