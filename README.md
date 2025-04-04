@@ -32,7 +32,7 @@ hello.sleet
 - [ ] create new near account, a *.user.raycast.near account
 - [ ] my own meme token launchpad, maybe a separte extention
 - [ ] interact with near contracts, some samples and options for devlopmental
-- [ ] discover near dapps and open in the browser
+- [x] discover near dapps and open in the browser
 
 web4, awesomeweb4
 - [x] discover and open web4 sites in browser
