@@ -31,19 +31,9 @@ function DetailView({ app }: DetailViewProps) {
 
   return (
     <Detail
+      markdown={app.logo_url ? `![${app.title}](${app.logo_url})` : ''}
       metadata={
         <Detail.Metadata>
-          {app.logo_url && (
-            <Detail.Metadata.TagList title="Logo">
-              <Detail.Metadata.TagList.Item
-                text=""
-                icon={{
-                  source: app.logo_url,
-                  mask: Image.Mask.RoundedRectangle
-                }}
-              />
-            </Detail.Metadata.TagList>
-          )}
           <Detail.Metadata.Label title="Title" text={app.title} />
           <Detail.Metadata.Label title="Account" text={app.dapp_account_id} />
           <Detail.Metadata.Label title="Web4 URL" text={web4Url} />
