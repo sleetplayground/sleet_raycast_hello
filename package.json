@@ -43,6 +43,14 @@
       "mode": "view",
       "icon": "sleet_code_icon_trans.png",
       "view": "NearCli"
+    },
+    {
+      "name": "submit-web4-app",
+      "title": "Submit Web4 App",
+      "description": "Submit or update your Web4 app to the catalog",
+      "mode": "view",
+      "icon": "web_globe_icon.png",
+      "view": "submit-web4-app"
     }
   ],
   "preferences": [

@@ -33,10 +33,12 @@ hello.sleet
 - [ ] create a meme token on meme cooking
 - [ ] linktree
 - [ ] colorsnake
+- [ ] my own meme token launchpad, maybe a separte extention
 
 web4, awesomeweb4
-- [ ] discover and open web4 sites in browser
+- [x] discover and open web4 sites in browser
 - [ ] submit web4 app
+- [ ] web4 ipfs gateway checker
 
 
 near cli commands
