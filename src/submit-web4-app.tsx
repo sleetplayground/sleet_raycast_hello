@@ -20,11 +20,11 @@ interface Web4App {
 }
 
 const CATEGORIES = [
-  { value: "0", title: "Games" },
-  { value: "1", title: "DeFi" },
-  { value: "2", title: "Tools" },
-  { value: "3", title: "Social" },
-  { value: "4", title: "Other" },
+  { value: "0", title: "Games", slug: "games" },
+  { value: "1", title: "NFT", slug: "nft" },
+  { value: "2", title: "DeFi", slug: "defi" },
+  { value: "3", title: "Social", slug: "social" },
+  { value: "4", title: "Development", slug: "development" },
 ];
 
 const METHODS = [
@@ -35,6 +35,21 @@ const METHODS = [
 export default function Command() {
   const { pop } = useNavigation();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [accounts, setAccounts] = useState<{ value: string; title: string }[]>([]);
+
+  useEffect(() => {
+    async function loadAccounts() {
+      const { networkId } = await getNetworkConfig();
+      const availableAccounts = getAvailableAccounts(networkId);
+      setAccounts(
+        availableAccounts.map((acc) => ({
+          value: acc.account_id,
+          title: acc.account_id,
+        }))
+      );
+    }
+    loadAccounts();
+  }, []);
 
   async function handleSubmit(values: Record<string, string>) {
     try {
@@ -52,7 +67,7 @@ export default function Command() {
       const { nodeUrl, networkId } = await getNetworkConfig();
       const near = await connect({ nodeUrl, networkId });
       const contractAddress = networkId === "mainnet" ? "awesomeweb4.near" : "awesomeweb4.testnet";
-      const account = await near.account(credentials.accountId);
+      const account = await near.account(credentials.account_id);
 
       const contract = new Contract(
         account,
@@ -60,27 +75,32 @@ export default function Command() {
         {
           viewMethods: ["get_apps"],
           changeMethods: ["add_app", "update_app"],
+          useLocalViewExecution: true
         }
       ) as Web4Contract;
 
       const app: Web4App = {
         title: values.title,
-        dapp_account_id: credentials.accountId,
+        dapp_account_id: values.account || credentials.account_id,
         categories: [values.category],
         slug: values.slug,
         oneliner: values.oneliner,
         description: values.description,
         logo_url: values.logo_url,
+        github: values.github || null,
+        twitter: values.twitter || null,
+        medium: values.medium || null,
+        discord: values.discord || null,
+        facebook: values.facebook || null,
+        telegram: values.telegram || null,
+        symbol: values.symbol || null,
+        token_address: values.token_address || null
       };
 
       const method = values.method === "add_app" ? "add_app" : "update_app";
       const deposit = utils.format.parseNearAmount("0.1");
 
-      await contract[method](
-        { app },
-        "300000000000000", // gas
-        deposit
-      );
+      await contract[method]({ app });
 
       showToast({
         style: Toast.Style.Success,
@@ -120,18 +140,32 @@ export default function Command() {
         ))}
       </Form.Dropdown>
 
+      <Form.Dropdown
+        id="account"
+        title="Account"
+        info="Select the NEAR account that will be used to submit the app"
+      >
+        {accounts.map((account) => (
+          <Form.Dropdown.Item
+            key={account.value}
+            value={account.value}
+            title={account.title}
+          />
+        ))}
+      </Form.Dropdown>
+
       <Form.TextField
         id="title"
         title="App Title"
         placeholder="Enter your app title"
-        validation={{ required: true }}
+        required
       />
 
       <Form.TextField
         id="slug"
         title="App Slug"
         placeholder="Enter a unique identifier for your app"
-        validation={{ required: true }}
+        required
       />
 
       <Form.Dropdown id="category" title="Category" defaultValue="4">
@@ -148,26 +182,74 @@ export default function Command() {
         id="oneliner"
         title="One-liner"
         placeholder="Brief description of your app"
-        validation={{ required: true }}
+        required
       />
 
       <Form.TextArea
         id="description"
         title="Description"
         placeholder="Detailed description of your app"
-        validation={{ required: true }}
+        required
       />
 
       <Form.TextField
         id="logo_url"
         title="Logo URL"
         placeholder="URL to your app's logo"
-        validation={{ required: true }}
+        required
+      />
+
+      <Form.TextField
+        id="github"
+        title="GitHub"
+        placeholder="Your GitHub username or repository URL"
+      />
+
+      <Form.TextField
+        id="twitter"
+        title="Twitter"
+        placeholder="Your Twitter handle"
+      />
+
+      <Form.TextField
+        id="medium"
+        title="Medium"
+        placeholder="Your Medium username"
+      />
+
+      <Form.TextField
+        id="discord"
+        title="Discord"
+        placeholder="Discord server invite link"
+      />
+
+      <Form.TextField
+        id="facebook"
+        title="Facebook"
+        placeholder="Facebook page URL"
+      />
+
+      <Form.TextField
+        id="telegram"
+        title="Telegram"
+        placeholder="Telegram group or channel link"
+      />
+
+      <Form.TextField
+        id="symbol"
+        title="Symbol"
+        placeholder="Token symbol (if applicable)"
+      />
+
+      <Form.TextField
+        id="token_address"
+        title="Token Address"
+        placeholder="Token contract address (if applicable)"
       />
 
       <Form.Description
         title="Note"
-        text="Submitting an app requires a deposit of 0.1 NEAR. The dapp_account_id will be automatically set to your logged-in account."
+        text="Submitting an app requires a deposit of 0.1 NEAR. The dapp_account_id will be set to the selected account."
       />
     </Form>
   );

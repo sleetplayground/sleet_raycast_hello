@@ -3,7 +3,7 @@ import { join } from "path";
 import { readFileSync, readdirSync } from "fs";
 import { KeyPairString } from "near-api-js/lib/utils/key_pair";
 
-interface AccountCredentials {
+export interface AccountCredentials {
   account_id: string;
   public_key: string;
   private_key: KeyPairString;
@@ -11,6 +11,23 @@ interface AccountCredentials {
 
 interface NetworkCredentials {
   [accountId: string]: AccountCredentials;
+}
+
+export async function getCredentials(): Promise<AccountCredentials | null> {
+  try {
+    const { networkId } = await import("./config").then(m => m.getNetworkConfig());
+    const accounts = getAvailableAccounts(networkId);
+    
+    if (accounts.length === 0) {
+      return null;
+    }
+    
+    // Return the first available account
+    return accounts[0];
+  } catch (error) {
+    console.error("Error getting credentials:", error);
+    return null;
+  }
 }
 
 export function getAvailableAccounts(networkId: string): AccountCredentials[] {
