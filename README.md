@@ -14,6 +14,7 @@ pnpm install
 
 pnpm dev
 pnpm lint
+tsc --noEmit
 
 # build && publish
 pnpm build

@@ -1,7 +1,11 @@
-import { Action, ActionPanel, List, Icon, showToast, Toast, Form, useNavigation } from "@raycast/api";
+import { Action, ActionPanel, List, Icon, showToast, Toast, Form, useNavigation, Detail, open } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
+
+interface Web4Contract extends Contract {
+  get_apps(): Promise<Web4App[]>;
+}
 
 interface Web4App {
   active: boolean;
@@ -18,23 +22,18 @@ interface DetailViewProps {
 }
 
 function DetailView({ app }: DetailViewProps) {
-  const openInBrowser = (url: string) => {
-    // Open the URL in the default browser
-    open(url);
-  };
-
   const web4Url = `${app.dapp_account_id}.page`;
 
   return (
-    <List.Item.Detail
+    <Detail
       metadata={
-        <List.Item.Detail.Metadata>
-          <List.Item.Detail.Metadata.Label title="Title" text={app.title} />
-          <List.Item.Detail.Metadata.Label title="Account" text={app.dapp_account_id} />
-          <List.Item.Detail.Metadata.Label title="Web4 URL" text={web4Url} />
-          {app.oneliner && <List.Item.Detail.Metadata.Label title="Summary" text={app.oneliner} />}
-          {app.description && <List.Item.Detail.Metadata.Label title="Description" text={app.description} />}
-        </List.Item.Detail.Metadata>
+        <Detail.Metadata>
+          <Detail.Metadata.Label title="Title" text={app.title} />
+          <Detail.Metadata.Label title="Account" text={app.dapp_account_id} />
+          <Detail.Metadata.Label title="Web4 URL" text={web4Url} />
+          {app.oneliner && <Detail.Metadata.Label title="Summary" text={app.oneliner} />}
+          {app.description && <Detail.Metadata.Label title="Description" text={app.description} />}
+        </Detail.Metadata>
       }
       actions={
         <ActionPanel>
@@ -49,7 +48,6 @@ export default function Command() {
   const [searchText, setSearchText] = useState("");
   const [apps, setApps] = useState<Web4App[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { push } = useNavigation();
 
   useEffect(() => {
     async function fetchApps() {
@@ -57,14 +55,16 @@ export default function Command() {
         const { nodeUrl, networkId } = await getNetworkConfig();
         const near = await connect({ nodeUrl, networkId });
         const contractAddress = networkId === "mainnet" ? "awesomeweb4.near" : "awesomeweb4.testnet";
+        const account = await near.account(contractAddress);
         const contract = new Contract(
-          near.account(),
+          account,
           contractAddress,
           {
             viewMethods: ["get_apps"],
             changeMethods: [],
+            useLocalViewExecution: true
           }
-        );
+        ) as Web4Contract;
 
         const apps = await contract.get_apps();
         setApps(apps);
