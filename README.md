@@ -31,6 +31,7 @@ hello.sleet
 - [X] update the greeting
 - [ ] create new near account, a *.user.raycast.near account
 - [ ] my own meme token launchpad, maybe a separte extention
+- interact with near contracts, some samples and options for devlopmental
 
 web4, awesomeweb4
 - [x] discover and open web4 sites in browser
