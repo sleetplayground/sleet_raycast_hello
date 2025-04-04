@@ -74,10 +74,11 @@ contract
 ### Near Dapps
 
 - https://onsocial.id/ - social on near
-- https://meme.cooking/board - meme tokens on near
-- https://near.pumpopoly.com/?invite=sleet.near - Virtual RealEstate Crypto Game on near
+- https://meme.cooking/?referral=sleet.near - meme tokens on near
+- https://near.pumpopoly.com/?invite=sleet.near - Virtual Real Estate Crypto Game on near
 - https://dex.rhea.finance/points?code=zmDT0oI - DEX on near
 - https://wallet.meteorwallet.app/wallet - meteor wallet
+- https://namesky.app/ - near account marketplace
 
 ---
 
