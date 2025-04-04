@@ -35,7 +35,7 @@ hello.sleet
 
 web4, awesomeweb4
 - [x] discover and open web4 sites in browser
-- [x] submit web4 app
+- [x] submit web4 apps
 - [ ] web4 ipfs gateway checker
 
 linktree

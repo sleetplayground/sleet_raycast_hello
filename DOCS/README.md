@@ -46,6 +46,9 @@ Submitting an app requires a deposit of 0.1 NEAR. The dapp_account_id must match
 
 
 ### Near Social
+https://near.social/
+https://onsocial.id/
+
 contract
 - v1.social08.testnet
 - social.near
@@ -61,6 +64,8 @@ near call social.near set '{"data":{"your-account.near":{"profile":{"linktree":{
 ```
 
 ### Meme Cooking
+https://meme.cooking/board
+
 contract
 - meme-cooking.near
 - factory.v10.meme-cooking.testnet
