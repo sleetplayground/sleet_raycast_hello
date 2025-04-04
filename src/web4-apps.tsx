@@ -22,6 +22,9 @@ interface DetailViewProps {
 }
 
 function getMainAccountId(accountId: string): string {
+  if (accountId === 'web4.testnet' || accountId === 'web4.near') {
+    return accountId;
+  }
   return accountId.startsWith('web4.') ? accountId.substring(5) : accountId;
 }
 
