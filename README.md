@@ -40,7 +40,9 @@ web4, awesomeweb4
 - [ ] web4 ipfs gateway checker
 
 meme-cooking.near - factory.v10.meme-cooking.testnet
-- [ ] create a meme token on meme cooking
+- [ ] create_meme - create a meme token on meme cooking
+- [ ] discover and trade meme tokens open https://meme.cooking/board in broswer
+- [ ] discover meme tokens on near, not just the meme cooking conrtact
 
 
 near cli commands
