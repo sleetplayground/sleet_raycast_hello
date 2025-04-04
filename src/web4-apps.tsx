@@ -5,11 +5,8 @@ import {
   Icon,
   showToast,
   Toast,
-  Form,
-  useNavigation,
   Detail,
-  open,
-  Image,
+  open
 } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { getNetworkConfig } from "./utils/config";

@@ -3,12 +3,6 @@ import { ActionPanel, Detail, Action, Clipboard } from "@raycast/api";
 import { getNetworkConfig } from "./utils/config";
 import { connect, Contract } from "near-api-js";
 
-interface GreetingProps {
-  greeting: string;
-  contractName: string;
-  networkId: string;
-}
-
 const GetGreeting = () => {
   const [greeting, setGreeting] = useState<string>("");
   const [contractName, setContractName] = useState<string>("");
