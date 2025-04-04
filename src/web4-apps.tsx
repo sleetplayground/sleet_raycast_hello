@@ -84,11 +84,12 @@ export default function Command() {
   }, []);
 
   const filteredApps = apps.filter((app) => {
+    if (!searchText) return true;
     const searchLower = searchText.toLowerCase();
     return (
-      app.title.toLowerCase().includes(searchLower) ||
-      app.dapp_account_id.toLowerCase().includes(searchLower) ||
-      (app.description?.toLowerCase().includes(searchLower) ?? false)
+      (app.title || '').toLowerCase().includes(searchLower) ||
+      (app.dapp_account_id || '').toLowerCase().includes(searchLower) ||
+      ((app.description || '').toLowerCase().includes(searchLower))
     );
   });
 
