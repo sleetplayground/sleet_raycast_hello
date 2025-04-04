@@ -43,11 +43,6 @@ near call awesomeweb4.testnet add_app '{"app":{"title":"undefined","dapp_account
 Submitting an app requires a deposit of 0.1 NEAR. The dapp_account_id must match the account_id of the user who is submitting the app.
 
 
-### Meme Cooking
-contract
-- meme-cooking.near
-- factory.v10.meme-cooking.testnet
-
 
 
 ### Near Social
@@ -57,8 +52,18 @@ contract
 
 
 ```sh
+# View profile data
+near view social.near get '{"keys":["youraccount.near/profile/**"]}'
+near view social.near get '{"keys":["sleet.near/profile/**"]}'
+
+# Set profile data
 near call social.near set '{"data":{"your-account.near":{"profile":{"linktree":{"github":"https://github.com/yourusername","twitter":"https://twitter.com/yourhandle","website":"https://yourwebsite.com"}}}}}' --accountId your-account.near --amount 0.000000000000000000000001
 ```
+
+### Meme Cooking
+contract
+- meme-cooking.near
+- factory.v10.meme-cooking.testnet
 
 ---
 

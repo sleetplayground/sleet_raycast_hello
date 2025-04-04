@@ -29,15 +29,19 @@ check mark for if they are implemented!
 hello.sleet
 - [x] get the greeting from hello.sleet.near/.testnet on mainnet and testnet
 - [X] update the greeting
-- [ ] create new near account, a *.user.raycast.near
-- [ ] linktree
-- [ ] colorsnake
+- [ ] create new near account, a *.user.raycast.near account
 - [ ] my own meme token launchpad, maybe a separte extention
 
 web4, awesomeweb4
 - [x] discover and open web4 sites in browser
 - [x] submit web4 app
 - [ ] web4 ipfs gateway checker
+
+linktree
+- [ ] linktree
+
+colorsnake
+- [ ] colorsnake
 
 meme-cooking.near - factory.v10.meme-cooking.testnet
 - [ ] create_meme - create a meme token on meme cooking
