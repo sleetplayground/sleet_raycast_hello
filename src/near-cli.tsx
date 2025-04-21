@@ -62,7 +62,7 @@ export default function Command() {
       title: "Deploy to NEAR Web4",
       command: "npx web4-deploy <src-directory> <destination-account.near> --yes",
       description: "Deploy a folder to NEAR Web4 using web4-deploy",
-      icon: Icon.Upload
+      icon: Icon.Upload,
     },
   ];
 
