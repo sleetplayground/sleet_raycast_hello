@@ -58,6 +58,12 @@ export default function Command() {
       description: "Display current NEAR network configuration",
       icon: Icon.Network,
     },
+    {
+      title: "Deploy to NEAR Web4",
+      command: "npx web4-deploy <src-directory> <destination-account.near> --yes",
+      description: "Deploy a folder to NEAR Web4 using web4-deploy",
+      icon: Icon.Upload
+    },
   ];
 
   return (
