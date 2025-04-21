@@ -105,7 +105,8 @@
     "@raycast/api": "^1.94.3",
     "@raycast/utils": "^1.17.0",
     "near-api-js": "^5.1.1",
-    "react": "^19.1.0"
+    "react": "^19.1.0",
+    "web4-deploy": "^0.8.0"
   },
   "devDependencies": {
     "@raycast/eslint-config": "^2.0.4",
